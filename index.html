@@ -1,3 +1,7 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Skill 盤點台</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,6 +78,7 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 .wrap{max-width:1440px;margin:0 auto;padding:64px 28px 112px}
+code{font-family:var(--mono);font-size:.85em;line-height:1.4}
 
 /* ── header ─────────────────────────── */
 .kicker{
@@ -113,7 +118,7 @@ h1 .s{color:var(--accent)}
 }
 .note.info{border-left-color:var(--accent)}
 .note b{font-weight:700}
-.note code{font-family:var(--mono);font-size:.85em;line-height:1.4;background:var(--accent-wash);padding:2px 6px;border-radius:2px}
+.note code{background:var(--accent-wash);padding:2px 6px;border-radius:2px}
 
 /* ── controls ───────────────────────── */
 .controls{margin:36px 0 0;position:sticky;top:0;background:var(--paper);padding:12px 0 4px;z-index:5}
@@ -177,16 +182,19 @@ h2 .n{color:var(--muted);font-size:var(--fs-small);font-variant-numeric:tabular-
 }
 .tag.manual{background:var(--warn-wash);color:var(--warn)}
 .tag.auto{background:var(--ok-wash);color:var(--ok)}
-.tag.ext{background:var(--accent-wash);color:var(--accent)}
+.tag.scope{background:var(--accent-wash);color:var(--accent)}
+.tag.limit{border:1px solid var(--line);color:var(--muted);padding:1px 7px}
 .rule{height:1px;background:var(--line-soft);margin:12px 0}
 .desc{font-size:var(--fs-body);color:var(--ink);margin:0}
 .when{font-size:var(--fs-small);line-height:var(--lh-small);color:var(--muted);margin:10px 0 0}
+.flag{font-size:var(--fs-small);line-height:var(--lh-small);color:var(--warn);margin:8px 0 0}
+.where{font-family:var(--mono);font-size:var(--fs-micro);line-height:1.5;color:var(--muted);margin:12px 0 0;word-break:break-all}
 .card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 0}
-.meta{font-family:var(--mono);font-size:var(--fs-micro);color:var(--muted)}
+.meta{font-family:var(--mono);font-size:var(--fs-micro);color:var(--muted);word-break:break-all}
 .copy{
   font-family:var(--mono);font-size:var(--fs-small);
   border:1px solid var(--line);background:var(--paper);color:var(--ink);
-  padding:7px 17px;cursor:pointer;
+  padding:7px 17px;cursor:pointer;flex:none;
 }
 .copy:hover{border-color:var(--accent);color:var(--accent)}
 .copy.done{background:var(--ok-wash);border-color:var(--ok);color:var(--ok)}
@@ -214,7 +222,7 @@ footer p{margin:0 0 10px;max-width:var(--measure-wide)}
   .controls,.theme,.copy{display:none}
   .wrap{max-width:none;padding:0}
   h1{font-size:24pt} h2{font-size:16pt} .cmd{font-size:13pt}
-  .desc{font-size:11pt} .when,.meta,.sub,footer{font-size:9.5pt}
+  .desc{font-size:11pt} .when,.flag,.where,.meta,.sub,footer{font-size:9.5pt}
   .tag,.kicker{font-size:9pt}
   .grid{grid-template-columns:repeat(2,1fr);gap:8px}
   .card{break-inside:avoid;border:1px solid #bbb}
@@ -222,200 +230,141 @@ footer p{margin:0 0 10px;max-width:var(--measure-wide)}
 </style>
 
 <div class="wrap">
-  <p class="kicker">Skill Deck · 本機 42 組 · 2026-09-11 盤點</p>
+  <p class="kicker" id="kicker">Skill Deck</p>
   <h1><span class="s">/</span>Skill 盤點台</h1>
 
-  <p class="lede">這台機器 <code style="font-family:var(--mono);font-size:.85em">~/.claude/skills</code> 底下裝了 42 個 skill。其中 <strong>16 個模型叫不動，只能你自己打指令</strong>，那是這張表存在的理由。點「複製」拿到指令，貼進對話框就會啟動。</p>
+  <p class="lede" id="lede"></p>
 
   <div class="note">
-    <b>手動與自動的差別。</b>帶 <code>手動</code> 標記的 16 個在設定裡寫了 <code>disable-model-invocation: true</code>，模型不會依情境自動觸發，必須打指令。這是刻意的——它們會改 issue tracker、產生大量檔案或重設專案設定。剩下 26 個會在情境符合時自動啟動，你也可以手動叫。
+    <b>裝在哪裡，決定在哪裡叫得到。</b>標 <code>任何專案</code> 的裝在 <code>~/.claude/skills</code>，或是用 <code>/plugin install</code> 裝的外掛，開哪個專案都能用。標「限某專案」的只裝在那個專案的 <code>.claude/skills</code>，離開那個專案就叫不到。
   </div>
   <div class="note info">
-    <b>資料來源。</b>指令名稱與分類來自 2026-09-09 對 <code>~/.claude/skills</code> 的實際掃描（2026-09-10 補入 multi-session-opord 一組，2026-09-11 補入 i-have-adhd 與 i-have-adhd-zh-tw 兩組），說明取自各 skill 的 <code>SKILL.md</code> frontmatter，經改寫成一句話。分類是我依用途歸的，不是原作者的分法。
+    <b>資料來源。</b>這一頁由 <code>sync-skills.mjs</code> 掃描本機產生，不是手寫的。中文說明與分類寫在 <code>deck.json</code>；還沒寫的 skill 會放進「新安裝・待分類」，說明直接取自 <code>SKILL.md</code>。
   </div>
 
   <div class="controls">
     <div class="searchbar">
       <span class="slash">/</span>
-      <input id="q" type="text" placeholder="輸入指令或關鍵字，例如：逐字稿、活頁簿、review" autocomplete="off" spellcheck="false">
-      <span class="count"><span id="shown">42</span> / 42</span>
+      <input id="q" type="text" placeholder="輸入指令或關鍵字，例如：MR、架構、React" autocomplete="off" spellcheck="false">
+      <span class="count"><span id="shown">0</span> / <span id="total">0</span></span>
     </div>
     <p class="hints">
       <span>按 <kbd>/</kbd> 跳到搜尋框</span>
       <span><kbd>Esc</kbd> 清除</span>
       <span>點卡片任一處也可複製</span>
     </p>
-    <div class="chips" id="chips">
-      <button class="chip" data-f="all" aria-pressed="true">全部</button>
-      <button class="chip" data-f="manual" aria-pressed="false">只看手動</button>
-      <button class="chip" data-f="proj" aria-pressed="false">專案專用</button>
-      <button class="chip" data-f="plan" aria-pressed="false">規劃與釐清</button>
-      <button class="chip" data-f="build" aria-pressed="false">實作與測試</button>
-      <button class="chip" data-f="diag" aria-pressed="false">診斷與審查</button>
-      <button class="chip" data-f="arch" aria-pressed="false">架構與文件</button>
-      <button class="chip" data-f="env" aria-pressed="false">環境與流程</button>
-      <button class="chip" data-f="ext" aria-pressed="false">外來部署</button>
-    </div>
+    <div class="chips" id="chips"></div>
   </div>
 
   <p class="empty" hidden id="empty">沒有符合的指令。按 Esc 清除搜尋。</p>
 
-  <section data-sec="proj">
-    <h2>專案專用 <span class="n">9 組</span></h2>
-    <p class="sub">為這裡的實際業務寫的，也是唯一會動到客戶資料與活頁簿的一群。全部會自動觸發。</p>
-    <div class="grid"></div>
-  </section>
-
-  <section data-sec="plan">
-    <h2>規劃與釐清 <span class="n">8 組</span></h2>
-    <p class="sub">把還沒想清楚的東西逼成能動手的規格、票或問卷。這一群手動的比例最高。</p>
-    <div class="grid"></div>
-  </section>
-
-  <section data-sec="build">
-    <h2>實作與測試 <span class="n">4 組</span></h2>
-    <p class="sub">從規格走到程式碼。</p>
-    <div class="grid"></div>
-  </section>
-
-  <section data-sec="diag">
-    <h2>診斷與審查 <span class="n">4 組</span></h2>
-    <p class="sub">出問題、要審查、要分流的時候。</p>
-    <div class="grid"></div>
-  </section>
-
-  <section data-sec="arch">
-    <h2>架構與文件 <span class="n">6 組</span></h2>
-    <p class="sub">結構層級的思考，以及寫給人跟 agent 看的文件。</p>
-    <div class="grid"></div>
-  </section>
-
-  <section data-sec="env">
-    <h2>環境與流程 <span class="n">10 組</span></h2>
-    <p class="sub">設定專案、管住危險操作，以及對話本身的流程控制。</p>
-    <div class="grid"></div>
-  </section>
-
-  <section data-sec="ext">
-    <h2>外來部署 <span class="n">1 組</span></h2>
-    <p class="sub">不是你裝的，是 teamai 套件自帶、隨 <code style="font-family:var(--mono);font-size:.85em">teamai pull</code> 部署到本機的。團隊 repo 的 skills 目錄其實是空的。</p>
-    <div class="grid"></div>
-  </section>
+  <main id="deck"></main>
 
   <footer>
-    <p>盤點時間 2026-09-11。專案目錄底下沒有 <code style="font-family:var(--mono)">.claude/skills</code>，所以沒有專案層 skill。此表不含 plugin 提供的 skill（pdf-viewer、product-management、small-business、anthropic-skills、cowork-plugin-management）與 Claude Code 內建指令。</p>
-    <p>提醒：內建的 <code style="font-family:var(--mono)">xlsx</code> 不適用於工作追蹤活頁簿，那份檔案的 26 條下拉選單是 x14 格式，openpyxl 存不回去，要走 <code style="font-family:var(--mono)">/work-tracker-fill</code>。</p>
+    <p id="synced"></p>
+    <p>裝了新 skill 之後：在 repo 根目錄跑 <code>node sync-skills.mjs</code>，再 commit、push。只想檢查網站和本機是否一致，跑 <code>node sync-skills.mjs --check</code>。</p>
+    <p>不列入：桌面版內建的外掛、Claude Code 內建指令，以及沒有 <code>SKILL.md</code> 的資料夾（例如 <code>_shared</code>）。</p>
   </footer>
 </div>
 
 <button class="theme" id="theme" type="button">切換深淺色</button>
 
+<script src="skills-data.js"></script>
 <script>
-const DATA = [
- ["proj","work-tracker-fill",0,"維護工作追蹤活頁簿：寫入工作項目、完成版本升版、版面精簡。","全程保護既有公式、資料驗證與版面，寫入後以檔案時間戳驗證。"],
- ["proj","ssdc-evidence-audit",0,"SSDC 系統的第二階段原始碼實證研究，全程唯讀。","固定 D-4 Linkage → D-5 State → D-3 Change → D-2 Responsibility → D-1 Identity → D-6 Evidence 順序。"],
- ["proj","meeting-minutes",0,"逐字稿整理成決議、爭議、資訊、待辦四類會議紀錄。","同一份 JSON 輸出 Word、HTML 與 Markdown。單純逐字轉錄不適用。"],
- ["proj","system-status-check",0,"查 GitHub repo 狀態與健康檢查端點，兩邊比對後產出報告。","會指出追蹤表裡過時的「已知風險」。寫回活頁簿的動作交給 work-tracker-fill。"],
- ["proj","repo-assessment-report",0,"調查一個 repo 與它的線上端點，產出帶截圖的 PDF 評估報告。","明確區分「實際觀察」與「推測」。不做改程式碼或效能調校。"],
- ["proj","claim-audit",0,"稽核文章或逐字稿的論述品質，回查每個具名來源的原文。","輸出段落／問題／原因／修改建議的表格與優先順序。"],
- ["proj","transcript-to-article",0,"把演講或訪談逐字稿重組成可發布的繁體中文文章。","會修語音辨識錯字並標註無法確認的內容。會議紀錄請用 meeting-minutes。"],
- ["proj","markdown-conventions",0,"繁體中文 Markdown 的排版與結構規範。","標題層級、表格與清單取捨、中英混排空格。多半由其他 skill 取用，少單獨叫。"],
- ["proj","multi-session-opord",0,"當總參謀長：把會議待辦拆成多個 session 的分工作戰令，附給決策者的拍板單。","唯讀蒐證、反證、核實循環、分層授權派工；拍板前不改程式也不派單。說「你是總參謀長」或「幫我規劃分工」就會啟動。"],
+const DECK = window.SKILL_DECK;
+const $ = id => document.getElementById(id);
+const q = $("q");
+const shown = $("shown");
+const empty = $("empty");
+let filter = "all";
+let cards = [];
 
- ["plan","grilling",0,"針對一個計畫、決定或想法連續逼問，把思路壓到站得住為止。","說「grill me」之類的觸發詞就會自動啟動。"],
- ["plan","grill-me",1,"同樣是逼問，但這個入口只能手動叫。","和 grilling 功能重疊，差別只在觸發方式。"],
- ["plan","grill-with-docs",1,"逼問的同時把 ADR 與詞彙表一起寫出來。","適合會影響後續架構、需要留下決策紀錄的討論。"],
- ["plan","wayfinder",1,"把一個 session 裝不下的大工程，拆成 issue tracker 上的決策票逐一解決。","適用於方向還不明、需要邊做邊收斂的長期工作。"],
- ["plan","to-spec",1,"把當前對話直接寫成規格並發到 issue tracker。","不再訪談，純粹是把已經討論過的東西整理出來。"],
- ["plan","to-tickets",1,"把計畫或對話拆成一組追蹤票，每張票標明它擋住誰。","本地會寫成一票一檔，接真的 tracker 則建立原生阻塞關聯。"],
- ["plan","to-questionnaire",1,"把你答不了的決策轉成問卷，交給知道的人填。","適合卡在需要外部資訊的決策點。"],
- ["plan","prototype",0,"做一個拋棄式原型，回答某個設計問題。","用來確認狀態模型合不合理，或看看介面長什麼樣。"],
-
- ["build","implement",1,"依照規格或一組票開始實作。","通常接在 to-spec 或 to-tickets 之後。"],
- ["build","tdd",0,"測試先行的開發：紅、綠、重構。","說要 test-first 或提到紅綠重構就會自動啟動。"],
- ["build","scaffold-exercises",0,"建立練習題的目錄結構，含章節、題目、解答與講解。","產出直接通過 lint。"],
- ["build","migrate-to-shoehorn",0,"把測試檔裡的 as 型別斷言換成 shoehorn。","針對 TypeScript 測試的部分資料建構。"],
-
- ["diag","diagnosing-bugs",0,"難纏 bug 與效能回歸的診斷迴圈。","說「診斷」「debug 這個」或回報壞掉、噴錯、變慢就會啟動。"],
- ["diag","code-review",0,"從標準與規格兩軸審查某個基準點之後的變更。","兩個子代理並行跑，結果並排呈現。"],
- ["diag","triage",1,"讓 issue 與外部 PR 走一套分流狀態機，最後產出可交辦的簡報。","會分類、驗證，必要時逼問。"],
- ["diag","resolving-merge-conflicts",0,"處理進行中的 merge 或 rebase 衝突。","偵測到衝突狀態就會啟動。"],
-
- ["arch","codebase-design",0,"設計深模組時的共用語彙。","找可深化的地方、決定接縫位置、讓程式更好測試與導航。"],
- ["arch","improve-codebase-architecture",1,"掃描整個 codebase 找可深化處，出成視覺化 HTML 報告，再針對你挑的那個逼問。","比 codebase-design 重，是主動掃描而非被動諮詢。"],
- ["arch","domain-modeling",0,"建立並打磨專案的領域模型。","討論詞彙、寫 CONTEXT.md、記錄 ADR 時使用。"],
- ["arch","writing-for-agents",0,"寫給 agent 讀的文件。","建立或修改 skill、改 AGENTS.md 或 CLAUDE.md 時使用。"],
- ["arch","research",0,"對高可信一手來源查證，並把結果落成 repo 裡的 Markdown。","適合把讀文件、查 API 這類前置作業交出去。"],
- ["arch","teach",1,"在這個工作區裡教你一個新技能或概念。","會產生學習紀錄與詞彙表。"],
-
- ["env","setup-pre-commit",0,"在目前的 repo 裝 Husky 前置提交鉤子。","含 lint-staged 格式化、型別檢查與測試。"],
- ["env","git-guardrails-claude-code",0,"設 hook 擋掉危險的 git 指令。","push、reset --hard、clean、branch -D 等在執行前就被擋下。"],
- ["env","wizard",0,"產生互動式 bash 精靈，帶人走只有人能做的步驟。","開權限、設 CI secret、走第三方後台、一次性搬遷。"],
- ["env","karpathy-guidelines",0,"減少常見 LLM 編碼錯誤的行為準則。","避免過度複雜化、只做必要修改、把假設講出來。"],
- ["env","setup-matt-pocock-skills",1,"一次性前置設定：issue tracker、分流標籤詞彙、領域文件配置。","第一次用其他工程 skill 之前跑一次就好。"],
- ["env","ask-matt",1,"問哪個 skill 適合你現在的情況。","這一整套工程 skill 的路由器，不確定用哪個時先問它。"],
- ["env","handoff",1,"把當前對話壓縮成交接文件，讓另一個 session 接手。","context 快滿、或要換人接手時最實用。"],
- ["env","wait-what",1,"上一則訊息沒說清楚，要求重講一次。","短、直接，卡住的時候比重新解釋快。"],
- ["env","i-have-adhd-zh-tw",1,"把回覆改成 ADHD 友善的形狀：先給下一步、多步驟編號、每輪重述進度。","啟用後持續生效，說「stop adhd mode」或「一般模式」才關閉。繁中版。"],
- ["env","i-have-adhd",1,"同一套 ADHD 友善回覆規則的英文原版。","出自 ayghri/i-have-adhd；說「stop adhd mode」關閉。和繁中版擇一使用即可。"],
-
- ["ext","team-wiki-codebase",0,"把多倉庫、多微服務的大型代碼庫壓成結構化知識庫。","teamai 套件自帶，简体中文。適用 10 個以上倉庫、AI 直接讀讀不動的專案。"]
-];
-
-const SECMAP = {};
-document.querySelectorAll("section[data-sec]").forEach(s => SECMAP[s.dataset.sec] = s.querySelector(".grid"));
-
-for (const [sec, name, manual, desc, when] of DATA) {
-  const card = document.createElement("article");
-  card.className = "card";
-  card.dataset.k = (name + " " + desc + " " + when).toLowerCase();
-  card.dataset.sec = sec;
-  card.dataset.manual = manual ? "1" : "0";
-  card.dataset.cmd = "/" + name;
-
-  const top = document.createElement("div");
-  top.className = "card-top";
-  const cmd = document.createElement("span");
-  cmd.className = "cmd";
-  cmd.innerHTML = '<span class="s">/</span>';
-  cmd.append(name);
-  const tag = document.createElement("span");
-  if (sec === "ext") { tag.className = "tag ext"; tag.textContent = "teamai"; }
-  else if (manual) { tag.className = "tag manual"; tag.textContent = "手動"; }
-  else { tag.className = "tag auto"; tag.textContent = "自動"; }
-  top.append(cmd, tag);
-
-  const rule = document.createElement("div");
-  rule.className = "rule";
-
-  const d = document.createElement("p");
-  d.className = "desc";
-  d.textContent = desc;
-
-  const w = document.createElement("p");
-  w.className = "when";
-  w.textContent = when;
-
-  const foot = document.createElement("div");
-  foot.className = "card-foot";
-  const meta = document.createElement("span");
-  meta.className = "meta";
-  meta.textContent = manual ? "必須手動輸入" : "情境符合會自動啟動";
-  const btn = document.createElement("button");
-  btn.className = "copy";
-  btn.type = "button";
-  btn.textContent = "複製";
-  foot.append(meta, btn);
-
-  card.append(top, rule, d, w, foot);
-  SECMAP[sec].append(card);
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text != null) node.textContent = text;
+  return node;
 }
 
-const cards = [...document.querySelectorAll(".card")];
-const q = document.getElementById("q");
-const shown = document.getElementById("shown");
-const empty = document.getElementById("empty");
-let filter = "all";
+function renderHeader(skills, generatedAt) {
+  const manual = skills.filter(s => s.manual).length;
+  $("kicker").textContent = `Skill Deck · 本機 ${skills.length} 組 · ${generatedAt} 同步`;
+  $("total").textContent = skills.length;
+  const lede = $("lede");
+  lede.append(`這台電腦裝了 ${skills.length} 個 skill。`);
+  if (manual) {
+    lede.append(el("strong", "", `其中 ${manual} 個模型叫不動，只能你自己打指令`), "，其餘會在情境符合時自動啟動。");
+  } else {
+    lede.append("全部會在情境符合時自動啟動，也可以自己打指令。");
+  }
+  lede.append("點卡片複製指令，貼進對話框就會啟動。");
+  $("synced").textContent = `上次同步 ${generatedAt}。`;
+}
+
+function renderChips(skills, categories) {
+  const chips = $("chips");
+  const options = [["all", "全部"]];
+  if (skills.some(s => s.manual)) options.push(["manual", "只看手動"]);
+  for (const c of categories) {
+    if (skills.some(s => s.category === c.id)) options.push([c.id, c.title]);
+  }
+  for (const [f, label] of options) {
+    const b = el("button", "chip", label);
+    b.type = "button";
+    b.dataset.f = f;
+    b.setAttribute("aria-pressed", String(f === "all"));
+    chips.append(b);
+  }
+}
+
+function renderCard(s, categoryTitle) {
+  const card = el("article", "card");
+  card.dataset.k = [s.name, s.desc, s.when, s.source, categoryTitle, ...s.locations].join(" ").toLowerCase();
+  card.dataset.sec = s.category;
+  card.dataset.manual = s.manual ? "1" : "0";
+  card.dataset.cmd = "/" + s.name;
+
+  const top = el("div", "card-top");
+  const cmd = el("span", "cmd");
+  cmd.append(el("span", "s", "/"), s.name);
+  const trigger = el("span", s.manual ? "tag manual" : "tag auto", s.manual ? "手動" : "自動");
+  const scope = s.anyProject
+    ? el("span", "tag scope", "任何專案")
+    : el("span", "tag limit", "限 " + s.locations.join("、"));
+  top.append(cmd, trigger, scope);
+
+  card.append(top, el("div", "rule"), el("p", "desc", s.desc));
+  if (s.when) card.append(el("p", "when", s.when));
+  for (const note of s.notes) card.append(el("p", "flag", note));
+  card.append(el("p", "where", "位置 " + s.locations.join("、")));
+
+  const foot = el("div", "card-foot");
+  const meta = [s.source, s.version && "v" + s.version, s.installedAt && s.installedAt + " 安裝"].filter(Boolean).join(" · ");
+  const btn = el("button", "copy", "複製");
+  btn.type = "button";
+  foot.append(el("span", "meta", meta), btn);
+  card.append(foot);
+  return card;
+}
+
+function renderSections(skills, categories) {
+  const deck = $("deck");
+  for (const c of categories) {
+    const list = skills.filter(s => s.category === c.id);
+    if (!list.length) continue;
+    const section = el("section");
+    section.dataset.sec = c.id;
+    const h2 = el("h2", "", c.title + " ");
+    h2.append(el("span", "n", `${list.length} 組`));
+    section.append(h2);
+    if (c.sub) section.append(el("p", "sub", c.sub));
+    const grid = el("div", "grid");
+    for (const s of list) grid.append(renderCard(s, c.title));
+    section.append(grid);
+    deck.append(section);
+  }
+  cards = [...document.querySelectorAll(".card")];
+}
 
 function apply() {
   const term = q.value.trim().toLowerCase().replace(/^\//, "");
@@ -434,18 +383,6 @@ function apply() {
   shown.textContent = n;
   empty.hidden = n !== 0;
 }
-
-q.addEventListener("input", apply);
-
-document.getElementById("chips").addEventListener("click", e => {
-  const b = e.target.closest(".chip");
-  if (!b) return;
-  filter = b.dataset.f;
-  for (const c of document.querySelectorAll(".chip")) {
-    c.setAttribute("aria-pressed", String(c === b));
-  }
-  apply();
-});
 
 async function copyCmd(card, btn) {
   const text = card.dataset.cmd;
@@ -466,6 +403,28 @@ async function copyCmd(card, btn) {
   setTimeout(() => { btn.textContent = "複製"; btn.classList.remove("done"); }, 1400);
 }
 
+if (DECK) {
+  renderHeader(DECK.skills, DECK.generatedAt);
+  renderChips(DECK.skills, DECK.categories);
+  renderSections(DECK.skills, DECK.categories);
+  apply();
+} else {
+  empty.hidden = false;
+  empty.textContent = "找不到 skills-data.js。在 repo 根目錄跑 node sync-skills.mjs 產生資料。";
+}
+
+q.addEventListener("input", apply);
+
+$("chips").addEventListener("click", e => {
+  const b = e.target.closest(".chip");
+  if (!b) return;
+  filter = b.dataset.f;
+  for (const c of document.querySelectorAll(".chip")) {
+    c.setAttribute("aria-pressed", String(c === b));
+  }
+  apply();
+});
+
 document.addEventListener("click", e => {
   const card = e.target.closest(".card");
   if (!card) return;
@@ -483,13 +442,10 @@ document.addEventListener("keydown", e => {
   }
 });
 
-const themeBtn = document.getElementById("theme");
-themeBtn.addEventListener("click", () => {
+$("theme").addEventListener("click", () => {
   const cur = document.documentElement.getAttribute("data-theme");
   const isDark = cur ? cur === "dark"
     : matchMedia("(prefers-color-scheme: dark)").matches;
   document.documentElement.setAttribute("data-theme", isDark ? "light" : "dark");
 });
-
-apply();
 </script>

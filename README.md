@@ -1,112 +1,79 @@
 # Claude Skill 盤點台
 
-這台機器 `~/.claude/skills` 底下 42 個 Claude Code skill 的指令小抄。其中 **16 個必須手動輸入指令才會啟動**，其餘 26 個會在情境符合時自動觸發。
+這台電腦實際安裝的 Claude Code skill 清單。清單不是手寫的，是 `sync-skills.mjs` 掃描本機後產生的，所以之後裝了新 skill，跑一次腳本就會更新。
 
 線上版：<https://rita112025-cpu.github.io/claude-skill-deck/>，可搜尋、可篩選，點一下就能複製指令。
 
-## 手動與自動的差別
+## 裝了新 skill 之後
 
-標為「手動」的 skill，在 `SKILL.md` 裡寫了 `disable-model-invocation: true`，模型不會依情境自動觸發，必須自己輸入 `/指令名稱`。這是刻意的設計：它們多半會改動 issue tracker、產生大量檔案或重設專案設定。
+1. 在這個 repo 的根目錄執行 `node sync-skills.mjs`
+2. 看輸出：會列出新增、移除，以及還沒有中文說明的 skill
+3. （可選）在 `deck.json` 的 `skills` 補上 `category`、`desc`、`when`，再跑一次步驟 1
+4. `git add -A`、`git commit`、`git push`，GitHub Pages 通常 1～2 分鐘後更新
 
-## 來源
+只想檢查網站和本機是否一致：`node sync-skills.mjs --check`，不一致時結束碼為 1。
 
-| 來源 | 數量 | 授權 |
-|---|---|---|
-| 自製 | 9 | 本 repo 未附授權聲明 |
-| [mattpocock/skills](https://github.com/mattpocock/skills) | 29 | MIT |
-| [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | 1 | 原 repo 未標示 |
-| [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd) | 1 | MIT |
-| i-have-adhd 繁中譯本 | 1 | 檔案標示 MIT；取得來源未記錄 |
-| teamai 套件 | 1 | 隨 `teamai pull` 部署 |
+需要 Node.js 18 以上，不用安裝任何套件。
 
-本 repo 只收錄自製 skill `multi-session-opord` 的原始檔（`skills/` 目錄）。其他 skill 請到各自的來源 repo 取得。來源是 2026-09-11 比對各來源 repo 的 skill 名稱後判定的。
+## 掃描範圍
+
+| 位置 | 網站上的範圍標示 |
+|---|---|
+| `~/.claude/skills` | 任何專案 |
+| `deck.json` 的 `projectRoots`（預設 `D:/*`）底下各專案的 `.claude/skills` | 限該專案 |
+| 用 `/plugin install` 裝的外掛（讀 `~/.claude/plugins/installed_plugins.json`） | 任何專案；指令會帶外掛名稱，例如 `/i-have-adhd:i-have-adhd` |
+
+不列入：桌面版內建的外掛（anthropic-skills、pdf-viewer 等）、Claude Code 內建指令，以及沒有 `SKILL.md` 的資料夾（例如 `~/.claude/skills/_shared`）。
+
+專案放在別的磁碟或資料夾，就把路徑加進 `deck.json` 的 `projectRoots`。路徑可以用 `*`，例如 `C:/work/*`。
+
+## 檔案
+
+| 檔案 | 用途 |
+|---|---|
+| `index.html` | 網站本體 |
+| `skills-data.js` | 網站資料，由腳本產生，不要手改 |
+| `deck.json` | 掃描路徑、分類、中文說明 |
+| `sync-skills.mjs` | 同步腳本 |
+| `skills/multi-session-opord/` | 自製 skill 的原始檔備份；這台電腦沒裝，所以不在清單上 |
 
 ## 清單
 
-### 專案專用（9 個，自製）
+<!-- skills:start -->
 
-為實際業務寫的，也是唯一會動到客戶資料與活頁簿的一群。
+共 8 個（手動 1、自動 7），2026-09-14 同步。這一段由 `sync-skills.mjs` 產生，不要手動修改。
 
-| 指令 | 觸發 | 用途 |
-|---|---|---|
-| `/work-tracker-fill` | 自動 | 維護工作追蹤活頁簿：寫入工作項目、完成版本升版、版面精簡 |
-| `/ssdc-evidence-audit` | 自動 | SSDC 系統的第二階段原始碼實證研究，全程唯讀 |
-| `/meeting-minutes` | 自動 | 逐字稿整理成決議、爭議、資訊、待辦四類會議紀錄 |
-| `/system-status-check` | 自動 | 查 GitHub repo 狀態與健康檢查端點，兩邊比對後產出報告 |
-| `/repo-assessment-report` | 自動 | 調查一個 repo 與它的線上端點，產出帶截圖的 PDF 評估報告 |
-| `/claim-audit` | 自動 | 稽核文章或逐字稿的論述品質，回查每個具名來源的原文 |
-| `/transcript-to-article` | 自動 | 把演講或訪談逐字稿重組成可發布的繁體中文文章 |
-| `/markdown-conventions` | 自動 | 繁體中文 Markdown 的排版與結構規範 |
-| `/multi-session-opord` | 自動 | 把會議待辦拆成多個 session 的分工計畫，附給決策者確認的清單 |
+### 開工前（2）
 
-### 規劃與釐清（8 個，出自 mattpocock/skills）
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/fe-issue` | 自動 | 限 rita-ai-workbench | 把 PM 需求 Issue 轉成前端技術 Issue 草稿。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
+| `/fe-arch` | 自動 | 任何專案 | 前端專案的檔案與目錄放置規則。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
 
-| 指令 | 觸發 | 用途 |
-|---|---|---|
-| `/grilling` | 自動 | 針對計畫、決定或想法連續逼問，把思路壓到站得住為止 |
-| `/grill-me` | 手動 | 同樣是逼問，但這個入口只能手動叫 |
-| `/grill-with-docs` | 手動 | 逼問的同時把 ADR 與詞彙表一起寫出來 |
-| `/wayfinder` | 手動 | 把一個 session 裝不下的大工程，拆成 issue tracker 上的決策票逐一解決 |
-| `/to-spec` | 手動 | 把當前對話直接寫成規格並發到 issue tracker |
-| `/to-tickets` | 手動 | 把計畫或對話拆成一組追蹤票，每張票標明它擋住誰 |
-| `/to-questionnaire` | 手動 | 把答不了的決策轉成問卷，交給知道的人填 |
-| `/prototype` | 自動 | 做一個拋棄式原型，回答某個設計問題 |
+### 寫程式時（1）
 
-### 實作與測試（4 個，出自 mattpocock/skills）
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/react-best-practices` | 自動 | 限 rita-ai-workbench | Vercel 整理的 React／Next.js 效能規則，40 多條、分 8 類。 | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) |
 
-| 指令 | 觸發 | 用途 |
-|---|---|---|
-| `/implement` | 手動 | 依照規格或一組票開始實作 |
-| `/tdd` | 自動 | 測試先行的開發：紅、綠、重構 |
-| `/scaffold-exercises` | 自動 | 建立練習題的目錄結構，含章節、題目、解答與講解 |
-| `/migrate-to-shoehorn` | 自動 | 把測試檔裡的 `as` 型別斷言換成 shoehorn |
+### 交付前（2）
 
-### 診斷與審查（4 個，出自 mattpocock/skills）
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/fe-code-review` | 自動 | 任何專案 | 用規格、標準兩軸審查前端變更，串接內建 /code-review。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
+| `/verification-before-completion` | 自動 | 限 rita-ai-workbench | 說「完成」「修好」「測試通過」之前，先跑驗證指令、看到結果。 | [obra/superpowers](https://github.com/obra/superpowers) |
 
-| 指令 | 觸發 | 用途 |
-|---|---|---|
-| `/diagnosing-bugs` | 自動 | 難纏 bug 與效能回歸的診斷迴圈 |
-| `/code-review` | 自動 | 從標準與規格兩軸審查某個基準點之後的變更 |
-| `/triage` | 手動 | 讓 issue 與外部 PR 走一套分流狀態機，最後產出可交辦的簡報 |
-| `/resolving-merge-conflicts` | 自動 | 處理進行中的 merge 或 rebase 衝突 |
+### MR（2）
 
-### 架構與文件（6 個，出自 mattpocock/skills）
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/fe-mr-generator` | 自動 | 任何專案 | 產生 Merge Request 的標題與描述。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
+| `/fe-mr-review` | 自動 | 任何專案 | AI 先審 GitLab MR，列出要人工確認的項目；也能分析並回覆 review comment。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
 
-| 指令 | 觸發 | 用途 |
-|---|---|---|
-| `/codebase-design` | 自動 | 設計深模組時的共用語彙 |
-| `/improve-codebase-architecture` | 手動 | 掃描整個 codebase 找可深化處，出成視覺化 HTML 報告，再針對挑中的那個逼問 |
-| `/domain-modeling` | 自動 | 建立並打磨專案的領域模型 |
-| `/writing-for-agents` | 自動 | 寫給 agent 讀的文件 |
-| `/research` | 自動 | 對高可信一手來源查證，並把結果寫成 repo 裡的 Markdown |
-| `/teach` | 手動 | 在這個工作區裡教一個新技能或概念 |
+### 對話設定（1）
 
-### 環境與流程（10 個）
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/i-have-adhd:i-have-adhd` | 手動 | 任何專案 | 把回覆改成 ADHD 友善的形狀：先給下一步、多步驟編號、每輪重述進度。 | [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd) |
 
-`/karpathy-guidelines` 出自 andrej-karpathy-skills，`/i-have-adhd` 出自 ayghri/i-have-adhd，`/i-have-adhd-zh-tw` 是它的繁中譯本，其餘 7 個出自 mattpocock/skills。
-
-| 指令 | 觸發 | 用途 |
-|---|---|---|
-| `/setup-pre-commit` | 自動 | 在目前的 repo 裝 Husky 前置提交鉤子 |
-| `/git-guardrails-claude-code` | 自動 | 設 hook 擋掉危險的 git 指令 |
-| `/wizard` | 自動 | 產生互動式 bash 精靈，帶人走只有人能做的步驟 |
-| `/karpathy-guidelines` | 自動 | 減少常見 LLM 編碼錯誤的行為準則 |
-| `/setup-matt-pocock-skills` | 手動 | 一次性前置設定：issue tracker、分流標籤詞彙、領域文件配置 |
-| `/ask-matt` | 手動 | 問哪個 skill 適合現在的情況 |
-| `/handoff` | 手動 | 把當前對話壓縮成交接文件，讓另一個 session 接手 |
-| `/wait-what` | 手動 | 上一則訊息沒說清楚，要求重講一次 |
-| `/i-have-adhd-zh-tw` | 手動 | 把回覆改成 ADHD 友善的形狀：先給下一步、多步驟編號、每輪重述進度 |
-| `/i-have-adhd` | 手動 | 同一套 ADHD 友善回覆規則的英文原版 |
-
-### 外來部署（1 個，teamai 套件）
-
-| 指令 | 觸發 | 用途 |
-|---|---|---|
-| `/team-wiki-codebase` | 自動 | 把多倉庫、多微服務的大型代碼庫壓成結構化知識庫 |
-
-## 資料來源與維護
-
-- **名稱與分類**：來自 2026-09-09 對 `~/.claude/skills` 的實際掃描，2026-09-10 補入 `multi-session-opord`，2026-09-11 補入 `i-have-adhd` 與 `i-have-adhd-zh-tw`。分類依用途歸納，不是原作者的分法。
-- **用途說明**：取自各 skill 的 `SKILL.md`，改寫成一句話。
-- **不列入的項目**：`multi-session-opord-workspace` 是工作資料夾，裡面沒有 `SKILL.md`，不是 skill。外掛提供的 skill 與 Claude Code 內建指令也不在此表。
-- **更新方式**：README 依線上版 `index.html` 裡的 `DATA` 陣列整理。新增或修改 skill 時，兩邊要一起更新。
+<!-- skills:end -->
