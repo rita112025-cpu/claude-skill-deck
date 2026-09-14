@@ -3,9 +3,10 @@
   "includePlugins": true,
   "categories": [
     { "id": "plan", "title": "開工前", "sub": "需求進來、動手之前：把需求拆成技術 Issue，決定檔案放哪。" },
-    { "id": "build", "title": "寫程式時", "sub": "寫或改程式時套用的規則。" },
-    { "id": "verify", "title": "交付前", "sub": "說「做完了」之前：先審查，再用實際跑出來的結果證明。" },
-    { "id": "mr", "title": "MR", "sub": "開 MR 與審 MR。" },
+    { "id": "build", "title": "寫程式時", "sub": "寫程式、修 bug 時套用的做法與規則。" },
+    { "id": "verify", "title": "交付前", "sub": "說「做完了」之前：先審查、用瀏覽器實測，再用實際跑出來的結果證明。" },
+    { "id": "mr", "title": "MR 與發版", "sub": "開 MR、審 MR，以及整理給人看的更新說明。" },
+    { "id": "ai", "title": "AI 工具開發", "sub": "寫 MCP server、prompt、skill 這類給 AI 用的東西時。" },
     { "id": "chat", "title": "對話設定", "sub": "調整 Claude 回覆方式的開關。" },
     { "id": "new", "title": "新安裝・待分類", "sub": "同步時新發現、deck.json 還沒幫它分類的 skill。說明直接取自 SKILL.md 原文。" }
   ],
@@ -25,10 +26,25 @@
       "desc": "Vercel 整理的 React／Next.js 效能規則，40 多條、分 8 類。",
       "when": "寫、改、審 React 元件、Next.js 頁面、資料抓取或 bundle 時啟動。"
     },
+    "test-driven-development": {
+      "category": "build",
+      "desc": "測試先行：先寫會失敗的測試，再寫實作讓它通過。",
+      "when": "開始實作功能或修 bug、還沒寫程式碼之前啟動。"
+    },
+    "systematic-debugging": {
+      "category": "build",
+      "desc": "遇到 bug、測試失敗或怪異行為時，先找出根因再動手修。",
+      "when": "回報壞掉、測試不過、結果不如預期，準備提出修正之前啟動。內含追根因、縱深防禦、找出污染狀態的測試等方法。"
+    },
     "fe-code-review": {
       "category": "verify",
       "desc": "用規格、標準兩軸審查前端變更，串接內建 /code-review。",
       "when": "說 review、「幫我看一下這個 branch」，或想知道改動會影響到哪裡時啟動。會追 diff 以外的呼叫點副作用。"
+    },
+    "playwright-skill": {
+      "category": "verify",
+      "desc": "用 Playwright 自動操作瀏覽器：測網站、截圖、檢查 RWD、登入流程與壞連結。",
+      "when": "說要測網站、驗證網頁功能或自動操作瀏覽器時啟動，會自動偵測本機的開發伺服器。"
     },
     "verification-before-completion": {
       "category": "verify",
@@ -44,6 +60,21 @@
       "category": "mr",
       "desc": "AI 先審 GitLab MR，列出要人工確認的項目；也能分析並回覆 review comment。",
       "when": "被指派審 MR，或 MR 上有 review 建議要處理時啟動。"
+    },
+    "changelog-generator": {
+      "category": "mr",
+      "desc": "把 git commit 整理成使用者看得懂的更新說明。",
+      "when": "要發版、寫 CHANGELOG，或整理這段時間改了什麼時啟動。會分類並濾掉技術細節。"
+    },
+    "mcp-builder": {
+      "category": "ai",
+      "desc": "打造 MCP server 的指南，讓 LLM 透過工具串接外部服務。",
+      "when": "要寫 MCP server 串接外部 API 時啟動，Python（FastMCP）或 Node／TypeScript（MCP SDK）都適用。"
+    },
+    "prompt-engineering": {
+      "category": "ai",
+      "desc": "寫 prompt 的技巧：優化提示、改善 LLM 輸出、設計可重用的 prompt 範本。",
+      "when": "撰寫 agent 指令、hook、skill、子代理 prompt，或任何跟 LLM 互動的內容時啟動。"
     },
     "i-have-adhd:i-have-adhd": {
       "category": "chat",

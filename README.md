@@ -13,6 +13,8 @@
 
 只想檢查網站和本機是否一致：`node sync-skills.mjs --check`，不一致時結束碼為 1。
 
+自動檢查：`node sync-skills.mjs --hook` 是給 Claude Code 的 SessionStart hook 用的，一致時不輸出任何東西，不一致時會在 session 開頭提醒。這台電腦已經在 `~/.claude/settings.json` 設定好，每次開新 session 或接續舊 session 都會跑一次。
+
 需要 Node.js 18 以上，不用安裝任何套件。
 
 ## 掃描範圍
@@ -41,7 +43,7 @@
 
 <!-- skills:start -->
 
-共 8 個（手動 1、自動 7），2026-09-14 同步。這一段由 `sync-skills.mjs` 產生，不要手動修改。
+共 14 個（手動 1、自動 13），2026-09-14 同步。這一段由 `sync-skills.mjs` 產生，不要手動修改。
 
 ### 開工前（2）
 
@@ -50,25 +52,36 @@
 | `/fe-issue` | 自動 | 限 rita-ai-workbench | 把 PM 需求 Issue 轉成前端技術 Issue 草稿。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
 | `/fe-arch` | 自動 | 任何專案 | 前端專案的檔案與目錄放置規則。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
 
-### 寫程式時（1）
+### 寫程式時（3）
 
 | 指令 | 觸發 | 範圍 | 用途 | 來源 |
 |---|---|---|---|---|
 | `/react-best-practices` | 自動 | 限 rita-ai-workbench | Vercel 整理的 React／Next.js 效能規則，40 多條、分 8 類。 | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) |
+| `/test-driven-development` | 自動 | 任何專案 | 測試先行：先寫會失敗的測試，再寫實作讓它通過。 | [obra/superpowers](https://github.com/obra/superpowers) |
+| `/systematic-debugging` | 自動 | 任何專案 | 遇到 bug、測試失敗或怪異行為時，先找出根因再動手修。 | [obra/superpowers](https://github.com/obra/superpowers) |
 
-### 交付前（2）
+### 交付前（3）
 
 | 指令 | 觸發 | 範圍 | 用途 | 來源 |
 |---|---|---|---|---|
 | `/fe-code-review` | 自動 | 任何專案 | 用規格、標準兩軸審查前端變更，串接內建 /code-review。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
+| `/playwright-skill` | 自動 | 任何專案 | 用 Playwright 自動操作瀏覽器：測網站、截圖、檢查 RWD、登入流程與壞連結。 | [lackeyjb/playwright-skill](https://github.com/lackeyjb/playwright-skill) |
 | `/verification-before-completion` | 自動 | 限 rita-ai-workbench | 說「完成」「修好」「測試通過」之前，先跑驗證指令、看到結果。 | [obra/superpowers](https://github.com/obra/superpowers) |
 
-### MR（2）
+### MR 與發版（3）
 
 | 指令 | 觸發 | 範圍 | 用途 | 來源 |
 |---|---|---|---|---|
 | `/fe-mr-generator` | 自動 | 任何專案 | 產生 Merge Request 的標題與描述。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
 | `/fe-mr-review` | 自動 | 任何專案 | AI 先審 GitLab MR，列出要人工確認的項目；也能分析並回覆 review comment。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
+| `/changelog-generator` | 自動 | 任何專案 | 把 git commit 整理成使用者看得懂的更新說明。 | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) |
+
+### AI 工具開發（2）
+
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/mcp-builder` | 自動 | 任何專案 | 打造 MCP server 的指南，讓 LLM 透過工具串接外部服務。 | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) |
+| `/prompt-engineering` | 自動 | 任何專案 | 寫 prompt 的技巧：優化提示、改善 LLM 輸出、設計可重用的 prompt 範本。 | [NeoLabHQ/context-engineering-kit](https://github.com/NeoLabHQ/context-engineering-kit) |
 
 ### 對話設定（1）
 

@@ -3,6 +3,8 @@
 //
 //   node sync-skills.mjs          同步（有變化才寫檔）
 //   node sync-skills.mjs --check  只檢查網站和本機是否一致，不一致時結束碼為 1
+//   node sync-skills.mjs --hook   給 Claude Code SessionStart hook 用：一致時不輸出，
+//                                 不一致或檢查失敗時輸出 hook JSON（systemMessage + additionalContext）
 //
 // 掃描範圍：
 //   1. ~/.claude/skills                                  任何專案都能用
@@ -18,12 +20,23 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const HOME = homedir();
-const CHECK = process.argv.includes("--check");
+const HOOK = process.argv.includes("--hook");
+const CHECK = HOOK || process.argv.includes("--check");
 const DATA_FILE = join(ROOT, "skills-data.js");
 const README_FILE = join(ROOT, "README.md");
 const MARK_START = "<!-- skills:start -->";
 const MARK_END = "<!-- skills:end -->";
 const NEW_CATEGORY = { id: "new", title: "新安裝・待分類", sub: "同步時新發現、deck.json 還沒幫它分類的 skill。" };
+
+// hook 模式下腳本壞掉也要講出來，不然每次開 session 都靜靜地什麼都沒檢查
+if (HOOK) {
+  const report = err => {
+    console.log(JSON.stringify({ systemMessage: `Skill 盤點台檢查失敗：${err?.message ?? err}（${ROOT}）` }));
+    process.exit(0);
+  };
+  process.on("uncaughtException", report);
+  process.on("unhandledRejection", report);
+}
 
 const deck = readJson(join(ROOT, "deck.json"));
 const overrides = deck.skills ?? {};
@@ -118,7 +131,7 @@ function hashDir(dir) {
   const h = createHash("sha1");
   (function walk(d) {
     for (const name of readdirSync(d).sort()) {
-      if ([".openskills.json", ".git", "node_modules"].includes(name)) continue;
+      if ([".openskills.json", ".skill-source.json", ".git", "node_modules"].includes(name)) continue;
       const p = join(d, name);
       if (isDir(p)) walk(p);
       else h.update(relative(dir, p).split(sep).join("/") + "\0" + readFileSync(p, "latin1").replace(/\r\n/g, "\n"));
@@ -135,7 +148,8 @@ function hideHome(s) {
 const marketplaces = readJsonIfExists(join(HOME, ".claude", "plugins", "known_marketplaces.json")) ?? {};
 
 function sourceOf(entry) {
-  const osj = readJsonIfExists(join(entry.dir, ".openskills.json"));
+  // .openskills.json 由 openskills 安裝時寫入；.skill-source.json 是只抓單一資料夾安裝時自己記的，欄位相容
+  const osj = readJsonIfExists(join(entry.dir, ".openskills.json")) ?? readJsonIfExists(join(entry.dir, ".skill-source.json"));
   if (osj) {
     const url = (osj.repoUrl ?? "").replace(/\.git$/, "");
     const label = osj.sourceType === "local" ? "本機檔案安裝" : url.replace(/^https?:\/\/github\.com\//, "") || osj.source;
@@ -307,13 +321,31 @@ const changed = skills.filter(s => before.has(s.name) && before.get(s.name) !== 
 const untranslated = skills.filter(s => !s.translated).map(s => s.name);
 const manualCount = skills.filter(s => s.manual).length;
 
-console.log(`本機共 ${skills.length} 個 skill（手動 ${manualCount}、自動 ${skills.length - manualCount}）`);
-if (added.length) console.log(`新增：${added.join("、")}`);
-if (removed.length) console.log(`移除：${removed.join("、")}`);
-if (changed.length) console.log(`有變動：${changed.join("、")}`);
-if (untranslated.length) console.log(`還沒有中文說明：${untranslated.join("、")}（在 deck.json 的 skills 補 category、desc、when）`);
+if (!HOOK) {
+  console.log(`本機共 ${skills.length} 個 skill（手動 ${manualCount}、自動 ${skills.length - manualCount}）`);
+  if (added.length) console.log(`新增：${added.join("、")}`);
+  if (removed.length) console.log(`移除：${removed.join("、")}`);
+  if (changed.length) console.log(`有變動：${changed.join("、")}`);
+  if (untranslated.length) console.log(`還沒有中文說明：${untranslated.join("、")}（在 deck.json 的 skills 補 category、desc、when）`);
+}
 
-if (CHECK) {
+if (HOOK) {
+  // 一致時什麼都不印，session 開頭才不會多一行雜訊
+  if (!(same && readmeSame)) {
+    const diff = [
+      added.length && `新增 ${added.join("、")}`,
+      removed.length && `移除 ${removed.join("、")}`,
+      changed.length && `有變動 ${changed.join("、")}`,
+    ].filter(Boolean).join("；") || "README 清單需要重新產生";
+    console.log(JSON.stringify({
+      systemMessage: `Skill 盤點台和本機不一致（${diff}）。到 ${ROOT} 跑 node sync-skills.mjs，再 commit、push。`,
+      hookSpecificOutput: {
+        hookEventName: "SessionStart",
+        additionalContext: `claude-skill-deck 網站（${ROOT}）和本機安裝的 skill 不一致：${diff}。使用者希望網站永遠跟本機一致：找適當時機提醒，並提議在該目錄執行 node sync-skills.mjs 同步；commit、push 之前要先取得使用者同意。`,
+      },
+    }));
+  }
+} else if (CHECK) {
   if (same && readmeSame) {
     console.log("網站和本機一致。");
   } else {
