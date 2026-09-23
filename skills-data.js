@@ -3,6 +3,247 @@ window.SKILL_DECK = {
   "generatedAt": "2026-09-23",
   "skills": [
     {
+      "name": "fe-issue",
+      "category": "plan",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "把 PM 需求 Issue 轉成前端技術 Issue 草稿。",
+      "when": "貼上 PM issue，或說「需求怎麼拆」「開發任務規劃」時啟動。給 GitLab Issue 網址會自動抓內容。",
+      "translated": true,
+      "source": "jackyu/claude-skills",
+      "sourceUrl": "https://github.com/jackyu/claude-skills",
+      "installedAt": "2026-09-23",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "fe-arch",
+      "category": "plan",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "前端專案的檔案與目錄放置規則。",
+      "when": "新增元件、API、hook、頁面，或問「這個檔案該放哪」「要不要抽共用」時啟動。",
+      "translated": true,
+      "source": "jackyu/claude-skills",
+      "sourceUrl": "https://github.com/jackyu/claude-skills",
+      "installedAt": "2026-09-23",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "vercel-react-best-practices",
+      "category": "build",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "Vercel 整理的 React／Next.js 效能規則，40 多條、分 8 類。",
+      "when": "寫、改、審 React 元件、Next.js 頁面、資料抓取或 bundle 時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "MIT",
+      "notes": []
+    },
+    {
+      "name": "superpowers:test-driven-development",
+      "category": "build",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "外掛 superpowers"
+      ],
+      "desc": "測試先行：先寫會失敗的測試，再寫實作讓它通過。",
+      "when": "開始實作功能或修 bug、還沒寫程式碼之前啟動。",
+      "translated": true,
+      "source": "obra/superpowers-marketplace",
+      "sourceUrl": "https://github.com/obra/superpowers-marketplace",
+      "installedAt": "2026-09-21",
+      "version": "6.4.1",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "superpowers:systematic-debugging",
+      "category": "build",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "外掛 superpowers"
+      ],
+      "desc": "遇到 bug、測試失敗或怪異行為時，先找出根因再動手修。",
+      "when": "回報壞掉、測試不過、結果不如預期，準備提出修正之前啟動。內含追根因、縱深防禦、找出污染狀態的測試等方法。",
+      "translated": true,
+      "source": "obra/superpowers-marketplace",
+      "sourceUrl": "https://github.com/obra/superpowers-marketplace",
+      "installedAt": "2026-09-21",
+      "version": "6.4.1",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "fe-code-review",
+      "category": "verify",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "用規格、標準兩軸審查前端變更，串接內建 /code-review。",
+      "when": "說 review、「幫我看一下這個 branch」，或想知道改動會影響到哪裡時啟動。會追 diff 以外的呼叫點副作用。",
+      "translated": true,
+      "source": "jackyu/claude-skills",
+      "sourceUrl": "https://github.com/jackyu/claude-skills",
+      "installedAt": "2026-09-23",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "playwright-skill",
+      "category": "verify",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "用 Playwright 自動操作瀏覽器：測網站、截圖、檢查 RWD、登入流程與壞連結。",
+      "when": "說要測網站、驗證網頁功能或自動操作瀏覽器時啟動，會自動偵測本機的開發伺服器。",
+      "translated": true,
+      "source": "lackeyjb/playwright-skill",
+      "sourceUrl": "https://github.com/lackeyjb/playwright-skill",
+      "installedAt": "2026-09-23",
+      "license": "MIT",
+      "notes": []
+    },
+    {
+      "name": "superpowers:verification-before-completion",
+      "category": "verify",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "外掛 superpowers"
+      ],
+      "desc": "說「完成」「修好」「測試通過」之前，先跑驗證指令、看到結果。",
+      "when": "準備 commit、開 PR，或要回報完成之前啟動。沒有證據就不算完成。",
+      "translated": true,
+      "source": "obra/superpowers-marketplace",
+      "sourceUrl": "https://github.com/obra/superpowers-marketplace",
+      "installedAt": "2026-09-21",
+      "version": "6.4.1",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "fe-mr-generator",
+      "category": "mr",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "產生 Merge Request 的標題與描述。",
+      "when": "說「幫我產 MR 描述」、整理 branch 變更，或開發完成要推 MR 時啟動。",
+      "translated": true,
+      "source": "jackyu/claude-skills",
+      "sourceUrl": "https://github.com/jackyu/claude-skills",
+      "installedAt": "2026-09-23",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "fe-mr-review",
+      "category": "mr",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "AI 先審 GitLab MR，列出要人工確認的項目；也能分析並回覆 review comment。",
+      "when": "被指派審 MR，或 MR 上有 review 建議要處理時啟動。",
+      "translated": true,
+      "source": "jackyu/claude-skills",
+      "sourceUrl": "https://github.com/jackyu/claude-skills",
+      "installedAt": "2026-09-23",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "changelog-generator",
+      "category": "mr",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "把 git commit 整理成使用者看得懂的更新說明。",
+      "when": "要發版、寫 CHANGELOG，或整理這段時間改了什麼時啟動。會分類並濾掉技術細節。",
+      "translated": true,
+      "source": "ComposioHQ/awesome-claude-skills",
+      "sourceUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
+      "installedAt": "2026-09-23",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "mcp-builder",
+      "category": "ai",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "打造 MCP server 的指南，讓 LLM 透過工具串接外部服務。",
+      "when": "要寫 MCP server 串接外部 API 時啟動，Python（FastMCP）或 Node／TypeScript（MCP SDK）都適用。",
+      "translated": true,
+      "source": "ComposioHQ/awesome-claude-skills",
+      "sourceUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
+      "installedAt": "2026-09-23",
+      "license": "Complete terms in LICENSE.txt",
+      "notes": []
+    },
+    {
+      "name": "prompt-engineering",
+      "category": "ai",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "寫 prompt 的技巧：優化提示、改善 LLM 輸出、設計可重用的 prompt 範本。",
+      "when": "撰寫 agent 指令、hook、skill、子代理 prompt，或任何跟 LLM 互動的內容時啟動。",
+      "translated": true,
+      "source": "NeoLabHQ/context-engineering-kit",
+      "sourceUrl": "https://github.com/NeoLabHQ/context-engineering-kit",
+      "installedAt": "2026-09-23",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "i-have-adhd",
+      "category": "chat",
+      "manual": true,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "把回覆改成 ADHD 友善的形狀：先給下一步、多步驟編號、每輪重述進度。",
+      "when": "打指令後整個 session 持續生效，說「stop adhd mode」關閉。這份是手動複製 skill 資料夾，外掛版原有的 always-on hook 開關沒有一併裝上，要用要另外跑 /plugin marketplace add ayghri/i-have-adhd 正式裝成外掛。",
+      "translated": true,
+      "source": "ayghri/i-have-adhd",
+      "sourceUrl": "https://github.com/ayghri/i-have-adhd",
+      "installedAt": "2026-09-23",
+      "license": "MIT",
+      "notes": []
+    },
+    {
       "name": "ask-matt",
       "category": "new",
       "manual": true,
@@ -606,42 +847,6 @@ window.SKILL_DECK = {
       "notes": []
     },
     {
-      "name": "superpowers:systematic-debugging",
-      "category": "new",
-      "manual": false,
-      "anyProject": true,
-      "locations": [
-        "外掛 superpowers"
-      ],
-      "desc": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
-      "when": "",
-      "translated": false,
-      "source": "obra/superpowers-marketplace",
-      "sourceUrl": "https://github.com/obra/superpowers-marketplace",
-      "installedAt": "2026-09-21",
-      "version": "6.4.1",
-      "license": "",
-      "notes": []
-    },
-    {
-      "name": "superpowers:test-driven-development",
-      "category": "new",
-      "manual": false,
-      "anyProject": true,
-      "locations": [
-        "外掛 superpowers"
-      ],
-      "desc": "Use when implementing any feature or bugfix, before writing implementation code",
-      "when": "",
-      "translated": false,
-      "source": "obra/superpowers-marketplace",
-      "sourceUrl": "https://github.com/obra/superpowers-marketplace",
-      "installedAt": "2026-09-21",
-      "version": "6.4.1",
-      "license": "",
-      "notes": []
-    },
-    {
       "name": "superpowers:using-git-worktrees",
       "category": "new",
       "manual": false,
@@ -668,24 +873,6 @@ window.SKILL_DECK = {
         "外掛 superpowers"
       ],
       "desc": "Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions",
-      "when": "",
-      "translated": false,
-      "source": "obra/superpowers-marketplace",
-      "sourceUrl": "https://github.com/obra/superpowers-marketplace",
-      "installedAt": "2026-09-21",
-      "version": "6.4.1",
-      "license": "",
-      "notes": []
-    },
-    {
-      "name": "superpowers:verification-before-completion",
-      "category": "new",
-      "manual": false,
-      "anyProject": true,
-      "locations": [
-        "外掛 superpowers"
-      ],
-      "desc": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidenc…",
       "when": "",
       "translated": false,
       "source": "obra/superpowers-marketplace",
@@ -882,23 +1069,6 @@ window.SKILL_DECK = {
       "sourceUrl": "",
       "installedAt": "",
       "license": "",
-      "notes": []
-    },
-    {
-      "name": "vercel-react-best-practices",
-      "category": "new",
-      "manual": false,
-      "anyProject": true,
-      "locations": [
-        "~/.claude/skills"
-      ],
-      "desc": "React and Next.js performance optimization guidelines from Vercel Engineering.",
-      "when": "This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React …",
-      "translated": false,
-      "source": "手動放置",
-      "sourceUrl": "",
-      "installedAt": "",
-      "license": "MIT",
       "notes": []
     },
     {

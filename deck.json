@@ -21,17 +21,17 @@
       "desc": "前端專案的檔案與目錄放置規則。",
       "when": "新增元件、API、hook、頁面，或問「這個檔案該放哪」「要不要抽共用」時啟動。"
     },
-    "react-best-practices": {
+    "vercel-react-best-practices": {
       "category": "build",
       "desc": "Vercel 整理的 React／Next.js 效能規則，40 多條、分 8 類。",
       "when": "寫、改、審 React 元件、Next.js 頁面、資料抓取或 bundle 時啟動。"
     },
-    "test-driven-development": {
+    "superpowers:test-driven-development": {
       "category": "build",
       "desc": "測試先行：先寫會失敗的測試，再寫實作讓它通過。",
       "when": "開始實作功能或修 bug、還沒寫程式碼之前啟動。"
     },
-    "systematic-debugging": {
+    "superpowers:systematic-debugging": {
       "category": "build",
       "desc": "遇到 bug、測試失敗或怪異行為時，先找出根因再動手修。",
       "when": "回報壞掉、測試不過、結果不如預期，準備提出修正之前啟動。內含追根因、縱深防禦、找出污染狀態的測試等方法。"
@@ -46,7 +46,7 @@
       "desc": "用 Playwright 自動操作瀏覽器：測網站、截圖、檢查 RWD、登入流程與壞連結。",
       "when": "說要測網站、驗證網頁功能或自動操作瀏覽器時啟動，會自動偵測本機的開發伺服器。"
     },
-    "verification-before-completion": {
+    "superpowers:verification-before-completion": {
       "category": "verify",
       "desc": "說「完成」「修好」「測試通過」之前，先跑驗證指令、看到結果。",
       "when": "準備 commit、開 PR，或要回報完成之前啟動。沒有證據就不算完成。"
@@ -76,10 +76,10 @@
       "desc": "寫 prompt 的技巧：優化提示、改善 LLM 輸出、設計可重用的 prompt 範本。",
       "when": "撰寫 agent 指令、hook、skill、子代理 prompt，或任何跟 LLM 互動的內容時啟動。"
     },
-    "i-have-adhd:i-have-adhd": {
+    "i-have-adhd": {
       "category": "chat",
       "desc": "把回覆改成 ADHD 友善的形狀：先給下一步、多步驟編號、每輪重述進度。",
-      "when": "打指令後整個 session 持續生效，說「stop adhd mode」關閉。外掛另附 always-on 開關。"
+      "when": "打指令後整個 session 持續生效，說「stop adhd mode」關閉。這份是手動複製 skill 資料夾，外掛版原有的 always-on hook 開關沒有一併裝上，要用要另外跑 /plugin marketplace add ayghri/i-have-adhd 正式裝成外掛。"
     }
   }
 }

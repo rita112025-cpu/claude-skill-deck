@@ -43,9 +43,53 @@
 
 <!-- skills:start -->
 
-共 63 個（手動 22、自動 41），2026-09-23 同步。這一段由 `sync-skills.mjs` 產生，不要手動修改。
+共 73 個（手動 23、自動 50），2026-09-23 同步。這一段由 `sync-skills.mjs` 產生，不要手動修改。
 
-### 新安裝・待分類（63）
+### 開工前（2）
+
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/fe-issue` | 自動 | 任何專案 | 把 PM 需求 Issue 轉成前端技術 Issue 草稿。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
+| `/fe-arch` | 自動 | 任何專案 | 前端專案的檔案與目錄放置規則。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
+
+### 寫程式時（3）
+
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/vercel-react-best-practices` | 自動 | 任何專案 | Vercel 整理的 React／Next.js 效能規則，40 多條、分 8 類。 | 手動放置 |
+| `/superpowers:test-driven-development` | 自動 | 任何專案 | 測試先行：先寫會失敗的測試，再寫實作讓它通過。 | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
+| `/superpowers:systematic-debugging` | 自動 | 任何專案 | 遇到 bug、測試失敗或怪異行為時，先找出根因再動手修。 | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
+
+### 交付前（3）
+
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/fe-code-review` | 自動 | 任何專案 | 用規格、標準兩軸審查前端變更，串接內建 /code-review。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
+| `/playwright-skill` | 自動 | 任何專案 | 用 Playwright 自動操作瀏覽器：測網站、截圖、檢查 RWD、登入流程與壞連結。 | [lackeyjb/playwright-skill](https://github.com/lackeyjb/playwright-skill) |
+| `/superpowers:verification-before-completion` | 自動 | 任何專案 | 說「完成」「修好」「測試通過」之前，先跑驗證指令、看到結果。 | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
+
+### MR 與發版（3）
+
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/fe-mr-generator` | 自動 | 任何專案 | 產生 Merge Request 的標題與描述。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
+| `/fe-mr-review` | 自動 | 任何專案 | AI 先審 GitLab MR，列出要人工確認的項目；也能分析並回覆 review comment。 | [jackyu/claude-skills](https://github.com/jackyu/claude-skills) |
+| `/changelog-generator` | 自動 | 任何專案 | 把 git commit 整理成使用者看得懂的更新說明。 | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) |
+
+### AI 工具開發（2）
+
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/mcp-builder` | 自動 | 任何專案 | 打造 MCP server 的指南，讓 LLM 透過工具串接外部服務。 | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) |
+| `/prompt-engineering` | 自動 | 任何專案 | 寫 prompt 的技巧：優化提示、改善 LLM 輸出、設計可重用的 prompt 範本。 | [NeoLabHQ/context-engineering-kit](https://github.com/NeoLabHQ/context-engineering-kit) |
+
+### 對話設定（1）
+
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/i-have-adhd` | 手動 | 任何專案 | 把回覆改成 ADHD 友善的形狀：先給下一步、多步驟編號、每輪重述進度。 | [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd) |
+
+### 新安裝・待分類（59）
 
 | 指令 | 觸發 | 範圍 | 用途 | 來源 |
 |---|---|---|---|---|
@@ -84,11 +128,8 @@
 | `/superpowers:receiving-code-review` | 自動 | 任何專案 | Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performativ… | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
 | `/superpowers:requesting-code-review` | 自動 | 任何專案 | Use when completing tasks, implementing major features, or before merging to verify work meets requirements | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
 | `/superpowers:subagent-driven-development` | 自動 | 任何專案 | Use when executing implementation plans with independent tasks in the current session | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
-| `/superpowers:systematic-debugging` | 自動 | 任何專案 | Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
-| `/superpowers:test-driven-development` | 自動 | 任何專案 | Use when implementing any feature or bugfix, before writing implementation code | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
 | `/superpowers:using-git-worktrees` | 自動 | 任何專案 | Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
 | `/superpowers:using-superpowers` | 自動 | 任何專案 | Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
-| `/superpowers:verification-before-completion` | 自動 | 任何專案 | Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidenc… | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
 | `/superpowers:writing-plans` | 自動 | 任何專案 | Use when you have a spec or requirements for a multi-step task, before touching code | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
 | `/superpowers:writing-skills` | 自動 | 任何專案 | Use when creating new skills, editing existing skills, or verifying skills work before deployment | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
 | `/tdd` | 自動 | 任何專案 | Test-driven development. | 手動放置 |
@@ -100,7 +141,6 @@
 | `/vercel-cli-with-tokens` | 自動 | 任何專案 | Deploy and manage projects on Vercel using token-based authentication. | 手動放置 |
 | `/vercel-composition-patterns` | 自動 | 任何專案 |  | 手動放置 |
 | `/vercel-optimize` | 自動 | 任何專案 | Use for Vercel cost and performance optimization on deployed projects, especially Next.js, SvelteKit, Nuxt, and limited Astro apps. | 手動放置 |
-| `/vercel-react-best-practices` | 自動 | 任何專案 | React and Next.js performance optimization guidelines from Vercel Engineering. | 手動放置 |
 | `/vercel-react-native-skills` | 自動 | 任何專案 |  | 手動放置 |
 | `/vercel-react-view-transitions` | 自動 | 任何專案 | Guide for implementing smooth, native-feeling animations using React's View Transition API (`<ViewTransition>` component, `addTransitionType`, and CSS view transition pseudo-elements). | 手動放置 |
 | `/wait-what` | 手動 | 任何專案 | Stop. | 手動放置 |
