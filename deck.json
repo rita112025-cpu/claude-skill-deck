@@ -8,6 +8,12 @@
     { "id": "mr", "title": "MR 與發版", "sub": "開 MR、審 MR，以及整理給人看的更新說明。" },
     { "id": "ai", "title": "AI 工具開發", "sub": "寫 MCP server、prompt、skill 這類給 AI 用的東西時。" },
     { "id": "chat", "title": "對話設定", "sub": "調整 Claude 回覆方式的開關。" },
+    { "id": "personal", "title": "訪談打磨", "sub": "用連續追問把一個計畫、設計或決定磨得更扎實。" },
+    { "id": "arch", "title": "架構與模組設計", "sub": "設計模組介面、找架構可深化的地方、佈線相依檢查工具。" },
+    { "id": "debug2", "title": "除錯與事後檢討", "sub": "追根因、寫 session 事後報告、分析哪裡跑歪了。" },
+    { "id": "collab", "title": "多代理協作與交接", "sub": "把工作交給另一個 agent、平行派工、隔離工作區、收尾分支。" },
+    { "id": "writing", "title": "寫作與文件", "sub": "把素材寫成文章、教材、給 agent 看的文件，或審查文件用字風格。" },
+    { "id": "setup2", "title": "環境與工具設置", "sub": "一次性把 repo 設定好：pre-commit、git 安全防護、Vercel 帳號、專案初始化。" },
     { "id": "new", "title": "新安裝・待分類", "sub": "同步時新發現、deck.json 還沒幫它分類的 skill。說明直接取自 SKILL.md 原文。" }
   ],
   "skills": {
@@ -80,6 +86,301 @@
       "category": "chat",
       "desc": "把回覆改成 ADHD 友善的形狀：先給下一步、多步驟編號、每輪重述進度。",
       "when": "打指令後整個 session 持續生效，說「stop adhd mode」關閉。這份是手動複製 skill 資料夾，外掛版原有的 always-on hook 開關沒有一併裝上，要用要另外跑 /plugin marketplace add ayghri/i-have-adhd 正式裝成外掛。"
+    },
+    "wait-what": {
+      "category": "chat",
+      "desc": "「等等，剛剛那句話沒聽懂」：請 Claude 用不同方式重講一次上一則回覆。",
+      "when": "覺得 Claude 上一句話講得太快、太術語、或沒說到重點時啟動。"
+    },
+    "ask-matt": {
+      "category": "collab",
+      "desc": "不知道現在該用哪個 skill 或走哪個流程時，問它一聲，它會幫你在這批 skill 裡找方向。",
+      "when": "面對一堆 skill 不知從何下手，或想知道某個情境該套哪個流程時啟動。"
+    },
+    "claude-handoff": {
+      "category": "collab",
+      "desc": "把目前對話交接給一個全新的背景 agent，讓它立刻接手繼續做。",
+      "when": "要把手上工作丟給另一個 session／agent 接續執行時啟動。"
+    },
+    "handoff": {
+      "category": "collab",
+      "desc": "把目前對話濃縮成一份交接文件，方便另一個 agent 接手。",
+      "when": "要離開這個 session、把進度整理好交給下一個人或下一個 agent 時啟動。"
+    },
+    "superpowers:dispatching-parallel-agents": {
+      "category": "collab",
+      "desc": "遇到兩個以上彼此獨立、沒有共用狀態或先後依賴的任務時，平行派給多個 agent 同時做。",
+      "when": "手上有多個互不相干的任務、想同時進行而非一個個做時啟動。"
+    },
+    "superpowers:subagent-driven-development": {
+      "category": "collab",
+      "desc": "執行一份實作計畫時，把各自獨立的任務拆給不同 subagent 分頭做。",
+      "when": "手上有計畫要落地、且任務之間可拆給多個 subagent 平行執行時啟動。"
+    },
+    "superpowers:using-git-worktrees": {
+      "category": "collab",
+      "desc": "開始一項需要跟目前工作區隔離的新功能開發前，準備一個獨立的 git worktree（或退而求其次的隔離方式）。",
+      "when": "要開新功能分支、又不想干擁目前工作區的變更，或準備執行實作計畫之前啟動。"
+    },
+    "superpowers:executing-plans": {
+      "category": "collab",
+      "desc": "在目前 session 裡親自把一份實作計畫執行到底（適用於沒有 subagent 工具、或使用者選擇自己動手做的情況）。",
+      "when": "要照著計畫一步步實作，且是自己（而非分派給 subagent）動手時啟動。"
+    },
+    "superpowers:finishing-a-development-branch": {
+      "category": "collab",
+      "desc": "實作做完、測試都過了，決定接下來要怎麼把這個分支併回去。",
+      "when": "功能做完、測試全過，準備決定 merge 方式或收尾流程時啟動。"
+    },
+    "superpowers:using-superpowers": {
+      "category": "collab",
+      "desc": "每個對話一開始就先確立「怎麼找、怎麼用」這批 skill 的規則，包含連澄清問題都要先套 skill。",
+      "when": "任何新對話開始時自動生效，是整套 superpowers 的入口規則。"
+    },
+    "codebase-design": {
+      "category": "arch",
+      "desc": "設計「深模組」時共用的詞彙庫：怎麼設計或改善模組介面、找出可以再深化的地方、決定介面切在哪裡。",
+      "when": "要設計或改善模組介面、找架構深化機會、讓程式碼更好測試或更利於 AI 導覽，或其他 skill 需要這套深模組詞彙時啟動。"
+    },
+    "domain-modeling": {
+      "category": "arch",
+      "desc": "建立並持續打磨一個專案的領域模型（domain model）。",
+      "when": "討論程式碼裡的術語、撰寫或修改 CONTEXT.md，或記錄／修改 ADR 時啟動。"
+    },
+    "improve-codebase-architecture": {
+      "category": "arch",
+      "desc": "掃描整個 codebase 找出可以深化架構的機會，做成可視化 HTML 報告，選一項後再用訪談方式打磨。",
+      "when": "想全面檢視架構、找出哪裡該重構或抽象化時啟動。"
+    },
+    "setup-ts-deep-modules": {
+      "category": "arch",
+      "desc": "把 dependency-cruiser 接進 TypeScript 專案，讓每個套件都成為「深模組」：實作藏在子資料夾裡，只能透過進入點檔案存取。",
+      "when": "使用者主動要求時啟動，用於一次性把架構邊界規則佈線進 repo。"
+    },
+    "diagnosing-bugs": {
+      "category": "debug2",
+      "desc": "處理難纏的 bug 或效能退化時的診斷迴圈。",
+      "when": "使用者說「diagnose」「debug this」，或回報東西壞了、丟例外、失敗、變慢時啟動。"
+    },
+    "superpowers:diagnosing-superpowers": {
+      "category": "debug2",
+      "desc": "當一個 superpowers session 出了狀況，幫忙分析為什麼——重工、計畫被忽略、卡頓、結果不好、該觸發的 skill 沒觸發、「怎麼跑這麼久／這麼貴」，也能整理成回報給 superpowers 維護者的 bug report。",
+      "when": "想搞懂某次（含過去的）session 為什麼跑歪、或要寫 bug report 時啟動，任何 harness 都適用。"
+    },
+    "retro": {
+      "category": "debug2",
+      "desc": "針對一次寫程式的 session 做事後回顧（retrospective）。",
+      "when": "一段開發工作告一段落，想回頭檢討這次做得如何時啟動。"
+    },
+    "grilling": {
+      "category": "personal",
+      "desc": "針對一個計畫、決定或想法，連續不斷地追問下去，逼出盲點。",
+      "when": "想要有人幫忙壓力測試自己的想法，或說出任何「grill」相關的觸發語時啟動。"
+    },
+    "grill-me": {
+      "category": "personal",
+      "desc": "用連續追問的方式訪談，把一個計畫或設計磨得更扎實。",
+      "when": "想把某個計畫或設計想清楚、經得起質疑時啟動。"
+    },
+    "grill-with-docs": {
+      "category": "personal",
+      "desc": "跟 grill-me 一樣是連續追問式訪談，但邊問邊順手產出 ADR 和名詞表等文件。",
+      "when": "想一邊釐清計畫、一邊把過程順便寫成正式文件時啟動。"
+    },
+    "loop-me": {
+      "category": "personal",
+      "desc": "針對「這個 workspace 裡想做的工作流程」進行連續追問，把規格問清楚。",
+      "when": "想設計一個新的工作流程、但規格還沒想清楚時啟動。"
+    },
+    "implement": {
+      "category": "build",
+      "desc": "根據一份規格或一批票券（tickets）把工作實作出來。",
+      "when": "手上已經有規格或票券，準備開始動手寫程式時啟動。"
+    },
+    "implement-spec": {
+      "category": "build",
+      "desc": "把一份規格（specification）落地實作成程式碼。",
+      "when": "手上有明確的 spec，要照著把功能寫出來時啟動。"
+    },
+    "migrate-to-shoehorn": {
+      "category": "build",
+      "desc": "把測試檔裡的 `as` 型別斷言換成 @total-typescript/shoehorn。",
+      "when": "使用者提到 shoehorn、想在測試裡取代 `as`、或需要局部（partial）測試資料時啟動。"
+    },
+    "prototype": {
+      "category": "build",
+      "desc": "做一個用完即丟的雛型（prototype），純粹用來回答一個設計上的疑問。",
+      "when": "想快速確認某個狀態模型或邏輯是否合理，或想探索 UI 該長什麼樣子時啟動。"
+    },
+    "tdd": {
+      "category": "build",
+      "desc": "測試先行開發（TDD）。",
+      "when": "使用者想先寫測試再做功能／修 bug，提到「red-green-refactor」，或想要整合測試時啟動。"
+    },
+    "vercel-composition-patterns": {
+      "category": "build",
+      "desc": "能撐得住規模的 React 組合模式（composition patterns）。",
+      "when": "重構 boolean prop 氾濫的元件、打造彈性元件庫、設計可重用 API，或碰到 compound components、render props、context providers、元件架構、React 19 API 變動時啟動。"
+    },
+    "vercel-react-native-skills": {
+      "category": "build",
+      "desc": "打造高效能行動 App 的 React Native／Expo 最佳實務。",
+      "when": "寫 React Native 元件、優化清單效能、實作動畫，或處理原生模組時啟動。"
+    },
+    "vercel-react-view-transitions": {
+      "category": "build",
+      "desc": "用 React 的 View Transition API 做流暢、原生感的動畫轉場。",
+      "when": "要加頁面轉場、路由切換動畫、共享元素動畫、元件進出場、清單重新排序動畫，或在 Next.js 整合 view transitions 時啟動。"
+    },
+    "code-review": {
+      "category": "verify",
+      "desc": "從固定基準點（commit／branch／tag／merge-base）開始，用「標準」與「規格」兩軸審查變更，兩個子 agent 平行跑、結果並排呈現。",
+      "when": "要 review 一個 branch、一個 PR、進行中的變更，或說「review since X」時啟動。"
+    },
+    "web-design-guidelines": {
+      "category": "verify",
+      "desc": "依 Web Interface Guidelines 審查 UI 程式碼。",
+      "when": "被要求「review my UI」「check accessibility」「audit design」「review UX」，或要對照最佳實務檢查網站時啟動。"
+    },
+    "resolving-merge-conflicts": {
+      "category": "verify",
+      "desc": "處理正在進行中的 git merge／rebase 衝突。",
+      "when": "遇到合併或 rebase 卡在衝突、需要解決時啟動。"
+    },
+    "superpowers:requesting-code-review": {
+      "category": "verify",
+      "desc": "完成任務、做完重要功能，或準備 merge 前，確認成果真的符合需求。",
+      "when": "準備收尾、要請人（或自己）review 之前啟動。"
+    },
+    "superpowers:receiving-code-review": {
+      "category": "verify",
+      "desc": "收到 code review 意見時，在動手改之前先技術性地檢視、驗證，尤其當意見看起來不清楚或技術上有疑慮時，不要照單全收。",
+      "when": "收到 review 回饋、準備採納建議之前啟動。"
+    },
+    "superpowers:writing-skills": {
+      "category": "ai",
+      "desc": "建立新 skill、修改既有 skill，或在部署前驗證 skill 真的能用。",
+      "when": "要寫新 skill、改 skill，或確認 skill 有效時啟動。"
+    },
+    "superpowers:brainstorming": {
+      "category": "plan",
+      "desc": "任何創造性工作（做新功能、蓋元件、加功能、改行為）動手之前，先探索使用者真正的意圖、需求與設計方向。",
+      "when": "開始任何創造性工作之前必須啟動，不能跳過。"
+    },
+    "superpowers:writing-plans": {
+      "category": "plan",
+      "desc": "手上有規格或需求、要做的是多步驟任務，在動程式碼之前先把計畫寫下來。",
+      "when": "拿到 spec 或需求、準備規劃多步驟任務、還沒開始寫程式碼時啟動。"
+    },
+    "to-spec": {
+      "category": "plan",
+      "desc": "把目前對話直接整理成一份規格，發布到專案的 issue tracker——不再訪談，只做已討論內容的綜合整理。",
+      "when": "討論已經夠完整、想直接收斂成正式規格並發布時啟動。"
+    },
+    "to-tickets": {
+      "category": "plan",
+      "desc": "把一份計畫、規格或目前對話拆成一批「tracer-bullet」票券，每張票標明它會卡住哪些其他票，發布到設定好的 tracker。",
+      "when": "計畫或規格已經有了，要拆成可執行、有依賴關係的票券時啟動。"
+    },
+    "to-questionnaire": {
+      "category": "plan",
+      "desc": "把一個自己答不出來的決定，轉換成一份給別人填的問卷。",
+      "when": "有個決定需要別人的輸入才能做，想用問卷形式收集答案時啟動。"
+    },
+    "triage": {
+      "category": "plan",
+      "desc": "讓 issue 和外部 PR 走過一套分流狀態機：分類、驗證、必要時訪談式追問、寫成 agent 可直接接手的簡報。",
+      "when": "有一批 issue／PR 需要整理分流、決定優先順序與後續處理方式時啟動。"
+    },
+    "wayfinder": {
+      "category": "plan",
+      "desc": "把一大塊超出單一 agent session 負荷的工作，規劃成 issue tracker 上一張張決策票券構成的地圖，逐一解決直到終點清楚為止。",
+      "when": "任務規模太大、一個 session 裝不下，需要拆成長期可追蹤的決策點時啟動。"
+    },
+    "research": {
+      "category": "plan",
+      "desc": "針對一個問題，對照高可信度的第一手資料來源進行調查，並把發現寫成 repo 裡的 Markdown 檔案。",
+      "when": "想研究某個主題、蒐集文件或 API 事實，或想把讀資料的苦工丟給背景 agent 時啟動。"
+    },
+    "pdf-extraction": {
+      "category": "plan",
+      "desc": "逐頁從 PDF 擷取文字並保留頁碼，優先用 PyMuPDF、備援 pypdf；掃描（純圖片）頁會標記 NEEDS_OCR，不會亂猜內容。",
+      "when": "被要求讀取、解析、擷取、摘要或交叉比對 PDF 時啟動，尤其是工程／SCADA 規格書要對照 Excel 或 DWG 資料的情境；純編輯、合併或跑 OCR 的需求不適用。"
+    },
+    "writing-beats": {
+      "category": "writing",
+      "desc": "把素材組裝成一連串「beat」構成的閱讀節奏，每個 beat 用到的詞彙都要先鋪墊過。",
+      "when": "有一批素材要組織成有節奏的文章結構時啟動（寫作系列技法之一）。"
+    },
+    "writing-fragments": {
+      "category": "writing",
+      "desc": "先不管結構，把原始素材、片段想法挖出來。",
+      "when": "還沒想清楚架構、只想先把素材倒出來時啟動（寫作系列技法之一）。"
+    },
+    "writing-shape": {
+      "category": "writing",
+      "desc": "把原始素材逐段塑形成一篇文章。",
+      "when": "素材已經有了，要動手組織成文章段落時啟動（寫作系列技法之一）。"
+    },
+    "writing-for-agents": {
+      "category": "writing",
+      "desc": "寫給 agent 看的文件的寫法。",
+      "when": "要建立或編輯 skill，或修改 AGENTS.md／CLAUDE.md 時啟動。"
+    },
+    "writing-guidelines": {
+      "category": "writing",
+      "desc": "依 Writing Guidelines 審查文件／文案。",
+      "when": "被要求「review my docs」「check writing style」「audit prose」，或要對照寫作規範檢查文件語氣時啟動。"
+    },
+    "teach": {
+      "category": "writing",
+      "desc": "在這個 workspace 裡教使用者一項新技能或新概念。",
+      "when": "使用者想學一個新概念或新技能時啟動。"
+    },
+    "pr": {
+      "category": "writing",
+      "desc": "寫 PR 內文時用。",
+      "when": "要撰寫 Pull Request 的說明內容時啟動。"
+    },
+    "scaffold-exercises": {
+      "category": "writing",
+      "desc": "建立練習題目錄結構：章節、題目、解答、講解，且都要通過 lint。",
+      "when": "想搭建練習題骨架、建立題目 stub，或設定新課程章節時啟動。"
+    },
+    "setup-matt-pocock-skills": {
+      "category": "setup2",
+      "desc": "把這個 repo 設定成可以用這套工程 skill：設好 issue tracker、triage 標籤詞彙、領域文件的擺放方式。",
+      "when": "第一次要用這批工程 skill 之前，先跑一次做初始設定。"
+    },
+    "setup-pre-commit": {
+      "category": "setup2",
+      "desc": "在目前 repo 裝上 Husky pre-commit hook，搭配 lint-staged（Prettier）、型別檢查與測試。",
+      "when": "要加 pre-commit hook、設定 Husky／lint-staged，或加上 commit 時的格式化／型別檢查／測試時啟動。"
+    },
+    "git-guardrails-claude-code": {
+      "category": "setup2",
+      "desc": "設定 Claude Code hook，在危險 git 指令（push、reset --hard、clean、branch -D 等）執行前擋下來。",
+      "when": "想防止誤觸破壞性 git 操作、加上 git 安全防護，或擋掉 Claude Code 裡的 git push／reset 時啟動。"
+    },
+    "deploy-to-vercel": {
+      "category": "setup2",
+      "desc": "把應用程式或網站部署到 Vercel。",
+      "when": "使用者要求「deploy my app」「deploy and give me the link」「push this live」，或要建立 preview deployment 時啟動。"
+    },
+    "vercel-cli-with-tokens": {
+      "category": "setup2",
+      "desc": "用 token 認證（而非互動登入）透過 Vercel CLI 部署與管理專案。",
+      "when": "要用 access token 操作 Vercel CLI，例如部署、初始設定、或新增環境變數時啟動。"
+    },
+    "vercel-optimize": {
+      "category": "setup2",
+      "desc": "針對已部署專案做 Vercel 成本與效能優化（Next.js／SvelteKit／Nuxt 為主，Astro 有限支援）：先收集 Vercel 指標與掃描結果，只追有數據支撐的候選項，產出有版本依據的建議。",
+      "when": "想降低 Vercel 帳單、處理慢或貴的路由、找快取機會，或關心 Function Invocations、Build Minutes、Fast Data Transfer、Core Web Vitals、Bot Management、Fluid compute 等指標時啟動。"
+    },
+    "wizard": {
+      "category": "setup2",
+      "desc": "產生一份互動式 bash 精靈，帶使用者一步步完成只有人類才能做的操作。",
+      "when": "要佈建基礎設施、設定憑證或 CI 密鑰、走一個不熟悉的第三方後台，或執行一次性遷移／切換時啟動；agent 自己能做的步驟不適用。"
     }
   }
 }
