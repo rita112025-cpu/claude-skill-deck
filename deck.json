@@ -15,6 +15,7 @@
     { "id": "collab", "title": "多代理協作與交接", "sub": "把工作交給另一個 agent、平行派工、隔離工作區、收尾分支。" },
     { "id": "writing", "title": "寫作與文件", "sub": "把素材寫成文章、教材、給 agent 看的文件，或審查文件用字風格。" },
     { "id": "setup2", "title": "環境與工具設置", "sub": "一次性把 repo 設定好：pre-commit、git 安全防護、Vercel 帳號、專案初始化。" },
+    { "id": "kb", "title": "專案知識庫", "sub": "把捷運／SCADA 專案文件整理成的查詢用知識庫，問到相關主題時才載入對應章節。" },
     { "id": "new", "title": "新安裝・待分類", "sub": "同步時新發現、deck.json 還沒幫它分類的 skill。說明直接取自 SKILL.md 原文。" }
   ],
   "skills": {
@@ -382,6 +383,99 @@
       "category": "setup2",
       "desc": "產生一份互動式 bash 精靈，帶使用者一步步完成只有人類才能做的操作。",
       "when": "要佈建基礎設施、設定憑證或 CI 密鑰、走一個不熟悉的第三方後台，或執行一次性遷移／切換時啟動；agent 自己能做的步驟不適用。"
+    },
+    "agent-browser": {
+      "category": "verify",
+      "desc": "用 CLI 操作網頁：開頁面、填表單、點按鈕、截圖、擷取資料。",
+      "when": "需要與網站互動、測試網頁應用，或自動化瀏覽器任務時使用。"
+    },
+    "book-to-skill": {
+      "category": "ai",
+      "desc": "把書或文件（PDF、EPUB 等）轉成 skill，萃取其中的框架與原則。",
+      "when": "想研讀一份文件、在工作時套用作者的框架，或從檔案建立可重用知識庫時使用。"
+    },
+    "brainstorming": {
+      "category": "plan",
+      "desc": "動手前先釐清需求與設計，經討論並取得你同意後才實作。",
+      "when": "做新功能、蓋元件、加功能或改行為之前啟動。"
+    },
+    "diagnosing-superpowers": {
+      "category": "debug2",
+      "desc": "分析 superpowers session 哪裡出錯，每項發現附上紀錄出處。"
+    },
+    "dispatching-parallel-agents": {
+      "category": "collab",
+      "desc": "兩個以上互不相依的任務，各派一個 agent 同時處理再整合。"
+    },
+    "er4-appendix-c-utility-routing": {
+      "category": "kb",
+      "desc": "汐東捷運業主需求書附錄 C：管線佈設與共同管架施作原則查詢。"
+    },
+    "executing-plans": {
+      "category": "build",
+      "desc": "在目前 session 自己逐項執行實作計畫，最後做一次整體審查。"
+    },
+    "finishing-a-development-branch": {
+      "category": "collab",
+      "desc": "測試通過後，列出合併、發 PR、保留等選項並收尾分支。"
+    },
+    "impeccable": {
+      "category": "build",
+      "desc": "設計、審查與打磨前端介面：版面、排版、配色、動效與無障礙。",
+      "when": "設計或改善網站、儀表板、元件、表單等前端介面時使用；純後端不適用。"
+    },
+    "receiving-code-review": {
+      "category": "verify",
+      "desc": "收到 code review 意見時先驗證再實作，不盲目照單全收。"
+    },
+    "requesting-code-review": {
+      "category": "verify",
+      "desc": "完成任務或 merge 前，派 reviewer 檢查成果是否符合需求。"
+    },
+    "scada-basecom-evidence-audit": {
+      "category": "kb",
+      "desc": "汐東／基隆 SCADA 文件盤點、證據分層與待確認事項查詢。"
+    },
+    "scada-xdmrt-tk01": {
+      "category": "kb",
+      "desc": "汐止東湖線 SCADA 送審文件查詢：主控台、設備規格、EMC、電纜光纖。"
+    },
+    "subagent-driven-development": {
+      "category": "collab",
+      "desc": "執行計畫時每項任務派新 subagent，逐項審查，最後整體審查。"
+    },
+    "systematic-debugging": {
+      "category": "debug2",
+      "desc": "遇到 bug 或測試失敗，先查出根因再修，沒查完不提修正。"
+    },
+    "test-driven-development": {
+      "category": "build",
+      "desc": "先寫會失敗的測試並看它失敗，再寫最少的程式碼讓它通過。"
+    },
+    "ui-ux-pro-max": {
+      "category": "build",
+      "desc": "查詢 UI/UX 風格、配色、字體與規範，用來設計與檢查介面。",
+      "when": "設計、建構、審查或修正頁面、元件、設計系統與無障礙等介面時使用。"
+    },
+    "using-git-worktrees": {
+      "category": "collab",
+      "desc": "開始功能開發前先確認有隔離工作區，沒有就建立 git worktree。"
+    },
+    "using-superpowers": {
+      "category": "chat",
+      "desc": "對話開始時先確立規則：只要有 skill 可能適用，回答前先呼叫它。"
+    },
+    "verification-before-completion": {
+      "category": "verify",
+      "desc": "宣稱完成、修好或通過之前，先實際跑驗證指令並看到結果。"
+    },
+    "writing-plans": {
+      "category": "plan",
+      "desc": "有規格的多步驟任務，動手前先寫成可照做的實作計畫。"
+    },
+    "writing-skills": {
+      "category": "ai",
+      "desc": "建立、修改 skill，並在部署前驗證它真的有效。"
     }
   }
 }
