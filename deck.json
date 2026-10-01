@@ -1,6 +1,7 @@
 {
   "projectRoots": ["D:/*"],
   "includePlugins": true,
+  "publicPlugins": [],
   "categories": [
     { "id": "plan", "title": "開工前", "sub": "需求進來、動手之前：把需求拆成技術 Issue，決定檔案放哪。" },
     { "id": "build", "title": "寫程式時", "sub": "寫程式、修 bug 時套用的做法與規則。" },

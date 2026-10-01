@@ -199,7 +199,10 @@ for (const pattern of deck.projectRoots ?? []) {
 
 if (deck.includePlugins !== false) {
   const installed = readJsonIfExists(join(HOME, ".claude", "plugins", "installed_plugins.json"))?.plugins ?? {};
+  // deck.json 的 publicPlugins 是陣列時，只公開名單內的外掛 ID（空陣列＝一個都不公開）；沒設定就維持舊行為，全部列出
+  const publicPlugins = Array.isArray(deck.publicPlugins) ? new Set(deck.publicPlugins) : null;
   for (const [id, installs] of Object.entries(installed)) {
+    if (publicPlugins && !publicPlugins.has(id)) continue;
     const [plugin, marketplace] = id.split("@");
     for (const inst of installs) {
       const anyProject = inst.scope === "user" || !inst.projectPath;
