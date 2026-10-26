@@ -1,6 +1,6 @@
 // 由 sync-skills.mjs 產生，不要手動修改。
 window.SKILL_DECK = {
-  "generatedAt": "2026-10-01",
+  "generatedAt": "2026-10-26",
   "skills": [
     {
       "name": "fe-issue",
@@ -131,6 +131,23 @@ window.SKILL_DECK = {
       ],
       "desc": "查詢 UI/UX 風格、配色、字體與規範，用來設計與檢查介面。",
       "when": "設計、建構、審查或修正頁面、元件、設計系統與無障礙等介面時使用。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "developing-with-streamlit",
+      "category": "build",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "所有 Streamlit 工作：建立、修改、除錯、美化、主題、效能與部署，也含自訂元件；依已安裝版本載入對應文件。",
+      "when": "只要碰到 Streamlit、st.、app.py、快取、fragment、st.components 時啟動。",
       "translated": true,
       "source": "手動放置",
       "sourceUrl": "",
@@ -343,6 +360,40 @@ window.SKILL_DECK = {
       "notes": []
     },
     {
+      "name": "gen-image",
+      "category": "ai",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "用 gen_comfy.py（本機 ComfyUI、SDXL）從文字提示產生圖片。",
+      "when": "說「用 ComfyUI 生成…」「畫一張…」時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "hf-cli",
+      "category": "ai",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "Hugging Face Hub 指令列 hf：下載、上傳與管理模型、資料集、Space、bucket、repo、論文、jobs 等。",
+      "when": "提到 hf、huggingface，或要處理 Hugging Face 登入、快取、上傳下載時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
       "name": "i-have-adhd",
       "category": "chat",
       "manual": true,
@@ -479,6 +530,499 @@ window.SKILL_DECK = {
       "notes": []
     },
     {
+      "name": "diagram-design",
+      "category": "writing",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "做品牌風格的圖表：架構圖、流程圖、時序圖、ER、時間軸、泳道、甘特、桑基、圖表等，輸出 HTML／SVG／PNG。",
+      "when": "要畫架構圖、流程圖或各類資訊圖表時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "MIT",
+      "notes": []
+    },
+    {
+      "name": "hyperframes",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "用 HyperFrames（HTML 轉影片）製作、編輯、動畫與渲染任何影片的入口：發表影片、說明片、音樂影片、圖表、字卡、字幕。",
+      "when": "要做、改或渲染 HyperFrames 影片時，最先讀這個。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "hyperframes-cli",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "HyperFrames 指令列工具用法：建立專案、檢查、預覽、剪時間軸、本機或雲端渲染、發佈，以及建置或渲染失敗時的排除。",
+      "when": "要跑 hyperframes 指令，或建置、渲染出錯時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "hyperframes-registry",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "約 450 個現成的 HyperFrames 區塊與元件（轉場、疊圖、標題、動態文字、字幕、圖表、地圖、3D、運鏡），安裝後可直接編輯。",
+      "when": "要做 CRT、glitch、底片顆粒、圖表等具名效果前先查這裡，不要從頭手刻；也用於 hyperframes add 與目錄。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "media-use",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "為 HyperFrames 影片取得或製作素材：音樂、音效、圖片、圖示、標誌、旁白、虛擬人物、轉錄、去背、調色，並混音。",
+      "when": "影片需要配樂、旁白、圖片，或畫面偏暗偏灰、想做風格化時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "figma",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "把 Figma 帶進 HyperFrames 影片：輸出素材、品牌 token、元件，並把畫格重建成動態。",
+      "when": "貼上 figma.com 連結，或要用某個 Figma 設計、畫格、標誌、品牌做影片時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "slideshow",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "用 HyperFrames 做可現場簡報的投影片：分段顯示、分支熱點、講者模式與備忘稿，由 hyperframes present 提供。",
+      "when": "要的是簡報而不是渲染成影片，或想把現有網頁改成簡報時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-to-hyperframes",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "把既有影片程式碼或素材移到 HyperFrames，並逐格比對原片驗證；以 Remotion 為主，也支援 Motion Canvas、Lottie、Three.js、p5.js 等。",
+      "when": "要移植、轉換或重用用其他工具做的影片時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "blender-explainer-video",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "用 HyperFrames 做 Blender（或其他軟體）的旁白教學短片：分鏡、HTML 場景、中文旁白、燒入字幕與背景音樂，輸出 MP4。",
+      "when": "要為某個軟體做教學、介紹或操作影片，並用 HyperFrames 渲染時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "video-shotcraft",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "用鏡頭配方卡與已驗收模板，做電影感產品影片：Remotion、真實頁面截圖、2.5D 運鏡、節奏卡點與聲音設計。",
+      "when": "要把前端專案或網頁做成產品宣傳片，或點名 Ink Press 模板、鏡頭卡時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "canopy-part-title",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "HyperFrames 動畫區塊：樹葉掃過畫面並分開，露出標題。1920×1080、12 秒。",
+      "when": "要這種葉片揭示標題的片頭時使用。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "code-slice-hero",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "HyperFrames 動畫區塊：拼貼式標題逐格翻轉，在深度場掃過時露出後方標題。1920×1080、8 秒。",
+      "when": "要逐格翻轉揭示標題的片頭時使用。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "cuboid-carousel",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "HyperFrames 動畫區塊：一串倒角方塊隨行進波移動，做成內容輪播。1920×1080、約 6.7 秒。",
+      "when": "要立體方塊輪播展示多段內容時使用。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "frost-sequence-camera-orbit",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "HyperFrames 動畫區塊：鏡頭環繞冰晶標誌，標誌碎裂後重組為兩段文字再淡出。1920×1080、22.5 秒。",
+      "when": "要冰碎裂重組的標誌片頭時使用。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "glass-shard-title",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "HyperFrames 動畫區塊：玻璃碎片穿過霧氣飛入，拼成標題。1920×1080、約 12 秒。",
+      "when": "要玻璃碎片拼出標題的片頭時使用。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "orbit-card",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "HyperFrames 動畫區塊：單張功能卡片沿已核可的 Blender 運鏡環繞點陣球體。1920×1080、10 秒。",
+      "when": "要卡片環繞球體展示單一功能時使用。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "wireframe-portal-title",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "HyperFrames 動畫區塊：線框傳送門炸開、標題穿出，字母再換成第二句。1920×1080、8 秒。",
+      "when": "要線框傳送門換字的片頭時使用。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-best-practices",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "Remotion 各項 skill 的總入口，依需求導向對應的子 skill。",
+      "when": "做 Remotion 影片，不確定該用哪個子 skill 時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-create",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "建立新的 Remotion 影片專案。",
+      "when": "要從零開始一支 Remotion 影片時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-markup",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "Remotion 的內容、動畫與特效最佳做法。",
+      "when": "寫 Remotion 場景、動畫、特效時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-captions",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "Remotion 的字幕：轉錄、顯示與動畫。",
+      "when": "要在 Remotion 影片加字幕或做字幕動畫時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-maps",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "Remotion 的地圖動畫知識。",
+      "when": "要在 Remotion 影片做地圖動畫時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-multimedia",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "在 Remotion 中用 Mediabunny 處理多媒體。",
+      "when": "要在 Remotion 讀寫、轉換音訊或影片檔時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-interactivity",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "規劃 Remotion 的標記結構，讓影片能被互動操作。",
+      "when": "要讓 Remotion 內容可互動時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-saas",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "用 Remotion 打造應用程式。",
+      "when": "要做以 Remotion 為核心的 SaaS 或應用時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-studio",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "預覽 Remotion 影片（Studio）。",
+      "when": "要預覽或調整 Remotion 影片時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-render",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "匯出（渲染）Remotion 影片。",
+      "when": "要把 Remotion 影片輸出成檔案時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-docs",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "搜尋 Remotion 官方文件。",
+      "when": "查 Remotion 的 API 或用法時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "remotion-upgrade",
+      "category": "video",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "升級 Remotion 與相關套件。",
+      "when": "要升級 Remotion 版本時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
       "name": "er4-appendix-c-utility-routing",
       "category": "kb",
       "manual": false,
@@ -522,6 +1066,57 @@ window.SKILL_DECK = {
       ],
       "desc": "汐止東湖線 SCADA 送審文件查詢：主控台、設備規格、EMC、電纜光纖。",
       "when": "",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "bim-meeting-minutes",
+      "category": "kb",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "把 Whisper 逐字稿整理成 BIM／SCADA 會議紀錄（完整查核版與內部傳閱精簡版），含專有名詞修正、轉 PDF、同步到會議紀錄資料夾。",
+      "when": "說「整理會議紀錄」「修正逐字稿」「轉 PDF」「精簡成內部傳閱版」時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "meeting-minutes-template",
+      "category": "kb",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "從逐字稿產生會議紀錄 docx，一律套用 MINUTES_TEMPLATE 範本的樣式與多層級編號。",
+      "when": "說「用逐字稿生成會議紀錄」「套用會議紀錄範本」時啟動。",
+      "translated": true,
+      "source": "手動放置",
+      "sourceUrl": "",
+      "installedAt": "",
+      "license": "",
+      "notes": []
+    },
+    {
+      "name": "xdmrt-pullbox-requirements",
+      "category": "kb",
+      "manual": false,
+      "anyProject": true,
+      "locations": [
+        "~/.claude/skills"
+      ],
+      "desc": "汐東捷運 SCADA 拉線箱規範查核：連續彎頭數、導線管尺寸、彎曲半徑、箱體材質與 IP、檢修空間、接地、標示，並可追溯原始 PDF 頁碼。",
+      "when": "查核拉線箱或接線盒設置，或要追溯規範出處與證據層級時啟動。",
       "translated": true,
       "source": "手動放置",
       "sourceUrl": "",
@@ -590,6 +1185,11 @@ window.SKILL_DECK = {
       "id": "setup2",
       "title": "環境與工具設置",
       "sub": "一次性把 repo 設定好：pre-commit、git 安全防護、Vercel 帳號、專案初始化。"
+    },
+    {
+      "id": "video",
+      "title": "影片與動畫製作",
+      "sub": "用 HyperFrames、Remotion 做影片、簡報與動畫片頭，含素材、工具與現成區塊。"
     },
     {
       "id": "kb",

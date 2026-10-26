@@ -43,7 +43,7 @@
 
 <!-- skills:start -->
 
-共 31 個（手動 1、自動 30），2026-10-01 同步。這一段由 `sync-skills.mjs` 產生，不要手動修改。
+共 66 個（手動 1、自動 65），2026-10-26 同步。這一段由 `sync-skills.mjs` 產生，不要手動修改。
 
 ### 開工前（4）
 
@@ -54,7 +54,7 @@
 | `/brainstorming` | 自動 | 任何專案 | 動手前先釐清需求與設計，經討論並取得你同意後才實作。 | 手動放置 |
 | `/writing-plans` | 自動 | 任何專案 | 有規格的多步驟任務，動手前先寫成可照做的實作計畫。 | 手動放置 |
 
-### 寫程式時（4）
+### 寫程式時（5）
 
 | 指令 | 觸發 | 範圍 | 用途 | 來源 |
 |---|---|---|---|---|
@@ -62,6 +62,7 @@
 | `/impeccable` | 自動 | 任何專案 | 設計、審查與打磨前端介面：版面、排版、配色、動效與無障礙。 | 手動放置 |
 | `/test-driven-development` | 自動 | 任何專案 | 先寫會失敗的測試並看它失敗，再寫最少的程式碼讓它通過。 | 手動放置 |
 | `/ui-ux-pro-max` | 自動 | 任何專案 | 查詢 UI/UX 風格、配色、字體與規範，用來設計與檢查介面。 | 手動放置 |
+| `/developing-with-streamlit` | 自動 | 任何專案 | 所有 Streamlit 工作：建立、修改、除錯、美化、主題、效能與部署，也含自訂元件；依已安裝版本載入對應文件。 | 手動放置 |
 
 ### 交付前（5）
 
@@ -81,7 +82,7 @@
 | `/fe-mr-review` | 自動 | 任何專案 | AI 先審 GitLab MR，列出要人工確認的項目；也能分析並回覆 review comment。 | 手動放置 |
 | `/changelog-generator` | 自動 | 任何專案 | 把 git commit 整理成使用者看得懂的更新說明。 | 手動放置 |
 
-### AI 工具開發（4）
+### AI 工具開發（6）
 
 | 指令 | 觸發 | 範圍 | 用途 | 來源 |
 |---|---|---|---|---|
@@ -89,6 +90,8 @@
 | `/prompt-engineering` | 自動 | 任何專案 | 寫 prompt 的技巧：優化提示、改善 LLM 輸出、設計可重用的 prompt 範本。 | 手動放置 |
 | `/book-to-skill` | 自動 | 任何專案 | 把書或文件（PDF、EPUB 等）轉成 skill，萃取其中的框架與原則。 | [virgiliojr94/book-to-skill](https://github.com/virgiliojr94/book-to-skill) |
 | `/writing-skills` | 自動 | 任何專案 | 建立、修改 skill，並在部署前驗證它真的有效。 | 手動放置 |
+| `/gen-image` | 自動 | 任何專案 | 用 gen_comfy.py（本機 ComfyUI、SDXL）從文字提示產生圖片。 | 手動放置 |
+| `/hf-cli` | 自動 | 任何專案 | Hugging Face Hub 指令列 hf：下載、上傳與管理模型、資料集、Space、bucket、repo、論文、jobs 等。 | 手動放置 |
 
 ### 對話設定（2）
 
@@ -113,12 +116,54 @@
 | `/subagent-driven-development` | 自動 | 任何專案 | 執行計畫時每項任務派新 subagent，逐項審查，最後整體審查。 | 手動放置 |
 | `/using-git-worktrees` | 自動 | 任何專案 | 開始功能開發前先確認有隔離工作區，沒有就建立 git worktree。 | 手動放置 |
 
-### 專案知識庫（3）
+### 寫作與文件（1）
+
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/diagram-design` | 自動 | 任何專案 | 做品牌風格的圖表：架構圖、流程圖、時序圖、ER、時間軸、泳道、甘特、桑基、圖表等，輸出 HTML／SVG／PNG。 | 手動放置 |
+
+### 影片與動畫製作（28）
+
+| 指令 | 觸發 | 範圍 | 用途 | 來源 |
+|---|---|---|---|---|
+| `/hyperframes` | 自動 | 任何專案 | 用 HyperFrames（HTML 轉影片）製作、編輯、動畫與渲染任何影片的入口：發表影片、說明片、音樂影片、圖表、字卡、字幕。 | 手動放置 |
+| `/hyperframes-cli` | 自動 | 任何專案 | HyperFrames 指令列工具用法：建立專案、檢查、預覽、剪時間軸、本機或雲端渲染、發佈，以及建置或渲染失敗時的排除。 | 手動放置 |
+| `/hyperframes-registry` | 自動 | 任何專案 | 約 450 個現成的 HyperFrames 區塊與元件（轉場、疊圖、標題、動態文字、字幕、圖表、地圖、3D、運鏡），安裝後可直接編輯。 | 手動放置 |
+| `/media-use` | 自動 | 任何專案 | 為 HyperFrames 影片取得或製作素材：音樂、音效、圖片、圖示、標誌、旁白、虛擬人物、轉錄、去背、調色，並混音。 | 手動放置 |
+| `/figma` | 自動 | 任何專案 | 把 Figma 帶進 HyperFrames 影片：輸出素材、品牌 token、元件，並把畫格重建成動態。 | 手動放置 |
+| `/slideshow` | 自動 | 任何專案 | 用 HyperFrames 做可現場簡報的投影片：分段顯示、分支熱點、講者模式與備忘稿，由 hyperframes present 提供。 | 手動放置 |
+| `/remotion-to-hyperframes` | 自動 | 任何專案 | 把既有影片程式碼或素材移到 HyperFrames，並逐格比對原片驗證；以 Remotion 為主，也支援 Motion Canvas、Lottie、Three.js、p5.js 等。 | 手動放置 |
+| `/blender-explainer-video` | 自動 | 任何專案 | 用 HyperFrames 做 Blender（或其他軟體）的旁白教學短片：分鏡、HTML 場景、中文旁白、燒入字幕與背景音樂，輸出 MP4。 | 手動放置 |
+| `/video-shotcraft` | 自動 | 任何專案 | 用鏡頭配方卡與已驗收模板，做電影感產品影片：Remotion、真實頁面截圖、2.5D 運鏡、節奏卡點與聲音設計。 | 手動放置 |
+| `/canopy-part-title` | 自動 | 任何專案 | HyperFrames 動畫區塊：樹葉掃過畫面並分開，露出標題。1920×1080、12 秒。 | 手動放置 |
+| `/code-slice-hero` | 自動 | 任何專案 | HyperFrames 動畫區塊：拼貼式標題逐格翻轉，在深度場掃過時露出後方標題。1920×1080、8 秒。 | 手動放置 |
+| `/cuboid-carousel` | 自動 | 任何專案 | HyperFrames 動畫區塊：一串倒角方塊隨行進波移動，做成內容輪播。1920×1080、約 6.7 秒。 | 手動放置 |
+| `/frost-sequence-camera-orbit` | 自動 | 任何專案 | HyperFrames 動畫區塊：鏡頭環繞冰晶標誌，標誌碎裂後重組為兩段文字再淡出。1920×1080、22.5 秒。 | 手動放置 |
+| `/glass-shard-title` | 自動 | 任何專案 | HyperFrames 動畫區塊：玻璃碎片穿過霧氣飛入，拼成標題。1920×1080、約 12 秒。 | 手動放置 |
+| `/orbit-card` | 自動 | 任何專案 | HyperFrames 動畫區塊：單張功能卡片沿已核可的 Blender 運鏡環繞點陣球體。1920×1080、10 秒。 | 手動放置 |
+| `/wireframe-portal-title` | 自動 | 任何專案 | HyperFrames 動畫區塊：線框傳送門炸開、標題穿出，字母再換成第二句。1920×1080、8 秒。 | 手動放置 |
+| `/remotion-best-practices` | 自動 | 任何專案 | Remotion 各項 skill 的總入口，依需求導向對應的子 skill。 | 手動放置 |
+| `/remotion-create` | 自動 | 任何專案 | 建立新的 Remotion 影片專案。 | 手動放置 |
+| `/remotion-markup` | 自動 | 任何專案 | Remotion 的內容、動畫與特效最佳做法。 | 手動放置 |
+| `/remotion-captions` | 自動 | 任何專案 | Remotion 的字幕：轉錄、顯示與動畫。 | 手動放置 |
+| `/remotion-maps` | 自動 | 任何專案 | Remotion 的地圖動畫知識。 | 手動放置 |
+| `/remotion-multimedia` | 自動 | 任何專案 | 在 Remotion 中用 Mediabunny 處理多媒體。 | 手動放置 |
+| `/remotion-interactivity` | 自動 | 任何專案 | 規劃 Remotion 的標記結構，讓影片能被互動操作。 | 手動放置 |
+| `/remotion-saas` | 自動 | 任何專案 | 用 Remotion 打造應用程式。 | 手動放置 |
+| `/remotion-studio` | 自動 | 任何專案 | 預覽 Remotion 影片（Studio）。 | 手動放置 |
+| `/remotion-render` | 自動 | 任何專案 | 匯出（渲染）Remotion 影片。 | 手動放置 |
+| `/remotion-docs` | 自動 | 任何專案 | 搜尋 Remotion 官方文件。 | 手動放置 |
+| `/remotion-upgrade` | 自動 | 任何專案 | 升級 Remotion 與相關套件。 | 手動放置 |
+
+### 專案知識庫（6）
 
 | 指令 | 觸發 | 範圍 | 用途 | 來源 |
 |---|---|---|---|---|
 | `/er4-appendix-c-utility-routing` | 自動 | 任何專案 | 汐東捷運業主需求書附錄 C：管線佈設與共同管架施作原則查詢。 | 手動放置 |
 | `/scada-basecom-evidence-audit` | 自動 | 任何專案 | 汐東／基隆 SCADA 文件盤點、證據分層與待確認事項查詢。 | 手動放置 |
 | `/scada-xdmrt-tk01` | 自動 | 任何專案 | 汐止東湖線 SCADA 送審文件查詢：主控台、設備規格、EMC、電纜光纖。 | 手動放置 |
+| `/bim-meeting-minutes` | 自動 | 任何專案 | 把 Whisper 逐字稿整理成 BIM／SCADA 會議紀錄（完整查核版與內部傳閱精簡版），含專有名詞修正、轉 PDF、同步到會議紀錄資料夾。 | 手動放置 |
+| `/meeting-minutes-template` | 自動 | 任何專案 | 從逐字稿產生會議紀錄 docx，一律套用 MINUTES_TEMPLATE 範本的樣式與多層級編號。 | 手動放置 |
+| `/xdmrt-pullbox-requirements` | 自動 | 任何專案 | 汐東捷運 SCADA 拉線箱規範查核：連續彎頭數、導線管尺寸、彎曲半徑、箱體材質與 IP、檢修空間、接地、標示，並可追溯原始 PDF 頁碼。 | 手動放置 |
 
 <!-- skills:end -->
