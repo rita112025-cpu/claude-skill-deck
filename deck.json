@@ -643,6 +643,26 @@
       "desc": "把 Whisper 逐字稿整理成 BIM／SCADA 會議紀錄（完整查核版與內部傳閱精簡版），含專有名詞修正、轉 PDF、同步到會議紀錄資料夾。",
       "when": "說「整理會議紀錄」「修正逐字稿」「轉 PDF」「精簡成內部傳閱版」時啟動。"
     },
+    "scada-upload-register": {
+      "category": "kb",
+      "desc": "依 SharePoint 截圖更新各站「_上傳檔案登記表.xlsx」，含時間換算、版次小寫規則（主版 v1／次版 v1.1）與檔名改小寫。",
+      "when": "說「幫我更新上傳登記表」「登記新上傳的 rvt」「版次改小寫」時啟動。"
+    },
+    "dwg-to-revit-shell": {
+      "category": "kb",
+      "desc": "只有 DWG 時用 Dynamo 腳本建 Revit 建築外殼草模：樓層、柱、牆、板、梁、門、樓梯、帷幕牆等，含 DXF 轉檔與圖塊抽取工具。",
+      "when": "說「只有 dwg 能建 revit 嗎」「用 CAD 平面圖建模」「寫 Dynamo 腳本建牆／柱／梁」時啟動。"
+    },
+    "navisworks-model-not-visible": {
+      "category": "kb",
+      "desc": "Navisworks 附加 NWC／NWD 後看不到模型、位置跑掉的排查流程：顯示、幾何、定位、座標框架，含 SB12／SB14 實案教訓。",
+      "when": "說「匯進 NWC 卻看不到」「模型找不到」「附加後位置不對」時啟動。"
+    },
+    "autocad-command-line-white-bar": {
+      "category": "kb",
+      "desc": "AutoCAD 圖面中間出現拖不動的白條、或命令列不見時的修法：用 COMMANDLINE 叫出並拖回視窗底部固定。",
+      "when": "說「AutoCAD 中間有白條」「命令列不見」「拔外接螢幕後畫面怪怪的」時啟動。"
+    },
     "meeting-minutes-template": {
       "category": "kb",
       "desc": "從逐字稿產生會議紀錄 docx，一律套用 MINUTES_TEMPLATE 範本的樣式與多層級編號。",
