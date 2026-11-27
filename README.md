@@ -43,7 +43,7 @@
 
 <!-- skills:start -->
 
-共 66 個（手動 1、自動 65），2026-10-26 同步。這一段由 `sync-skills.mjs` 產生，不要手動修改。
+共 70 個（手動 1、自動 69），2026-11-27 同步。這一段由 `sync-skills.mjs` 產生，不要手動修改。
 
 ### 開工前（4）
 
@@ -155,7 +155,7 @@
 | `/remotion-docs` | 自動 | 任何專案 | 搜尋 Remotion 官方文件。 | 手動放置 |
 | `/remotion-upgrade` | 自動 | 任何專案 | 升級 Remotion 與相關套件。 | 手動放置 |
 
-### 專案知識庫（6）
+### 專案知識庫（10）
 
 | 指令 | 觸發 | 範圍 | 用途 | 來源 |
 |---|---|---|---|---|
@@ -163,6 +163,10 @@
 | `/scada-basecom-evidence-audit` | 自動 | 任何專案 | 汐東／基隆 SCADA 文件盤點、證據分層與待確認事項查詢。 | 手動放置 |
 | `/scada-xdmrt-tk01` | 自動 | 任何專案 | 汐止東湖線 SCADA 送審文件查詢：主控台、設備規格、EMC、電纜光纖。 | 手動放置 |
 | `/bim-meeting-minutes` | 自動 | 任何專案 | 把 Whisper 逐字稿整理成 BIM／SCADA 會議紀錄（完整查核版與內部傳閱精簡版），含專有名詞修正、轉 PDF、同步到會議紀錄資料夾。 | 手動放置 |
+| `/scada-upload-register` | 自動 | 任何專案 | 依 SharePoint 截圖更新各站「_上傳檔案登記表.xlsx」，含時間換算、版次小寫規則（主版 v1／次版 v1.1）與檔名改小寫。 | 手動放置 |
+| `/dwg-to-revit-shell` | 自動 | 任何專案 | 只有 DWG 時用 Dynamo 腳本建 Revit 建築外殼草模：樓層、柱、牆、板、梁、門、樓梯、帷幕牆等，含 DXF 轉檔與圖塊抽取工具。 | 手動放置 |
+| `/navisworks-model-not-visible` | 自動 | 任何專案 | Navisworks 附加 NWC／NWD 後看不到模型、位置跑掉的排查流程：顯示、幾何、定位、座標框架，含 SB12／SB14 實案教訓。 | 手動放置 |
+| `/autocad-command-line-white-bar` | 自動 | 任何專案 | AutoCAD 圖面中間出現拖不動的白條、或命令列不見時的修法：用 COMMANDLINE 叫出並拖回視窗底部固定。 | 手動放置 |
 | `/meeting-minutes-template` | 自動 | 任何專案 | 從逐字稿產生會議紀錄 docx，一律套用 MINUTES_TEMPLATE 範本的樣式與多層級編號。 | 手動放置 |
 | `/xdmrt-pullbox-requirements` | 自動 | 任何專案 | 汐東捷運 SCADA 拉線箱規範查核：連續彎頭數、導線管尺寸、彎曲半徑、箱體材質與 IP、檢修空間、接地、標示，並可追溯原始 PDF 頁碼。 | 手動放置 |
 
